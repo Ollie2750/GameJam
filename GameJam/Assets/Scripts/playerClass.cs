@@ -25,7 +25,7 @@ public class playerClass : MonoBehaviour
 
     public void playerTurn()
     {
-        if (gauge < gaugeSize * 100f)
+        if (gauge < gaugeSize * 100f * 19.2f)
         {
             gauge += gaugeSpeed;
         }

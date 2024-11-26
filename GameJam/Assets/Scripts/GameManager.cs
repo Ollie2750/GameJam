@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
     public GameObject attackMenu;
     public GameObject attackScrollBarContent;
     public GameObject attackButton;
-
-
-
+ 
+    public Transform playerGaugeBarLocation;
+    public GameObject playerGaugeBar;
     public playerClass player;
     public enemyClass enemy;
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        attack_Uppercut = new attackClass("Uppercut", "strength", 1f, 10f, 0f, 0f, 0f, 0f, "Physical");
+        attack_Uppercut = new attackClass("Uppercut", "strength", 1f, 1f, 0f, 0f, 0f, 0f, "Physical");
         player.playerAttacks.Add(attack_Uppercut);
     }
 
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         {
             player.playerTurn();
             enemy.enemyTurn();
+            ChangeGaugeBar();
         } 
         
         
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
             
             GameObject tempButton = Instantiate(attackButton);
             tempButton.transform.SetParent(attackScrollBarContent.transform);
-            tempButton.transform.localScale = Vector3.one;
+            tempButton.transform.localScale = Vector2.one;
 
 
             EventTrigger.Entry pointerEnterEntry = new EventTrigger.Entry();
@@ -78,6 +79,9 @@ public class GameManager : MonoBehaviour
             pointerExitEntry.eventID = EventTriggerType.PointerExit;
             pointerExitEntry.callback.AddListener((data) => ChangeMenu("None"));
             tempButton.GetComponent<EventTrigger>().triggers.Add(pointerExitEntry);
+
+            Button button = tempButton.GetComponent<Button>();
+            button.onClick.AddListener(() => action(attack.attackName));
 
 
             GameObject tempButtonChild = tempButton.transform.GetChild(0).gameObject;
@@ -110,5 +114,21 @@ public class GameManager : MonoBehaviour
                 pickedActionRequirements.GetComponent<TMP_Text>().text = ("Needs 10 in strength");
                 break;
         }
+    }
+
+    public void action(string name)
+    {
+        switch (name)
+        {
+            case "Uppercut":
+                player.gauge -= attack_Uppercut.gaugeCost;
+                break;
+        }
+    }
+
+    public void ChangeGaugeBar()
+    {
+        playerGaugeBarLocation.position = new Vector2((-960 + (player.gauge/2))/108,0);
+        playerGaugeBar.transform.localScale = new Vector2(player.gauge,1);   
     }
 }
