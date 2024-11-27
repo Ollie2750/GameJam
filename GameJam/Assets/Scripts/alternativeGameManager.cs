@@ -34,6 +34,7 @@ public class alternativeGameManager : MonoBehaviour
 
     private Dictionary<string, attackClass> attackDictionary;
 
+    public Sprite uppercutSprite;
 
 
     void Start()
@@ -50,7 +51,7 @@ public class alternativeGameManager : MonoBehaviour
         };
         foreach (var attack in attackDictionary.Values)
         {
-            player.playerAttack.Add(attack);
+            player.playerAttacks.Add(attack);
         }
     }
 
@@ -108,12 +109,12 @@ public class alternativeGameManager : MonoBehaviour
 
     public void ChangeMenu(string name)
     {
-        if (attackDictionary.TryGetValue(attackName, out var attack))
+        if (attackDictionary.TryGetValue(name, out var attack))
         {
             // Update UI elements with attack information
-            pickedActionIcon.GetComponent<Image>().sprite = GetSpriteForAttack(attackName); // Replace with your sprite logic
+            pickedActionIcon.GetComponent<Image>().sprite = GetSpriteForAttack(name); // Replace with your sprite logic
             pickedActionName.GetComponent<TMP_Text>().text = attack.attackName;
-            pickedActionDescription.GetComponent<TMP_Text>().text = GetDescriptionForAttack(attackName); // Replace with your description logic
+            pickedActionDescription.GetComponent<TMP_Text>().text = GetDescriptionForAttack(name); // Replace with your description logic
             pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType} damage: {player.strength * attack.attackDamage}";
             pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber} in {attack.unlockStatName}";
         }
@@ -153,7 +154,7 @@ public class alternativeGameManager : MonoBehaviour
         switch (name)
         {
             case "Uppercut":
-                player.gauge -= attack_Uppercut.gaugeCost;
+                player.gauge -= attackDictionary[name].gaugeCost;
                 break;
         }
     }
@@ -163,6 +164,9 @@ public class alternativeGameManager : MonoBehaviour
         playerGaugeBarLocation.position = new Vector2((-960 + (player.gauge / 2)) / 108, 0);
         playerGaugeBar.transform.localScale = new Vector2(player.gauge, 1);
     }
+
+
+    //Skal måske ikke bruges
     public class AttackData
     {
         public Sprite Icon { get; set; }
