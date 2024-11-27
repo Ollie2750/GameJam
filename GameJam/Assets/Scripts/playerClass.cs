@@ -10,7 +10,8 @@ public class playerClass : MonoBehaviour
     public float magicalDefence;
     public float gaugeSpeed;
     public float gaugeSize;
-    public float gauge; 
+    public float gauge;
+    public float gaugeBarSize = 100f;
     public float strength;
     public float intelligence;
     public float luck;
@@ -38,7 +39,7 @@ public class playerClass : MonoBehaviour
 
     public void playerTurn()
     {
-        if (gauge < gaugeSize * 100f)
+        if (gauge < gaugeSize * gaugeBarSize)
         {
             gauge += gaugeSpeed;
         }

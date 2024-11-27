@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class alternativeGameManager : MonoBehaviour
 {
-    private Sprite noSprite;
+    public Sprite noSprite;
 
     //Level up screen Objects
     public GameObject levelUpCanvas;
@@ -32,10 +32,14 @@ public class alternativeGameManager : MonoBehaviour
 
     public Transform playerGaugeBarLocation;
     public GameObject playerGaugeBar;
+    public int amountOfGaugeBars = 20;
+    
+    //player
     public TMP_Text playerHealthText;
     public playerClass player;
     public GameObject playerBody;
 
+    //enemy
     public TMP_Text enemyhealthText;
     public enemyClass enemy;
     public GameObject enemyPrefab;
@@ -62,6 +66,7 @@ public class alternativeGameManager : MonoBehaviour
 
     //Attack sprites
     public Sprite uppercutSprite;
+    public Sprite punchSprite;
 
     //Enemy sprite
     public Sprite slimeSprite;
@@ -73,8 +78,8 @@ public class alternativeGameManager : MonoBehaviour
         levelUpCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", "", 0f, 1f, 1f, 0f, 0f, 0f, "Physical", noSprite, "Lets intrduce them to our fist") },
-            {"Uppercut", new attackClass("Uppercut", "strength", 10f, 1f, 1.2f, 0f, 0f, 0f, "Physical", uppercutSprite, "Duck and strike your opponent from underneath") },
+            {"Punch", new attackClass("Punch", "", 0f, 1f, 1f, 0f, 0f, 0f, "Physical", punchSprite, "Lets intrduce them to our fist") },
+            {"Uppercut", new attackClass("Uppercut", "strength", 10f, 1f, 1.2f*player.strength, 0f, 0f, 0f, "Physical", uppercutSprite, "Duck and strike your opponent from underneath") },
             {"Rising Spirit", new attackClass("RisingSpirit", "strength", 30f, 2f, 1.3f, 0f, 0f, 0f, "Physical", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
             {"BodyBreaker", new attackClass("BodyBreaker", "strength", 50f, 4f, 3f, -(player.maxHealth), 0f, 0f, "Physical", noSprite, "Break your opponents body with a force so great that it damages your own.") },
             {"Embers", new attackClass("Embers", "intelligence", 10f, 1f, 1.2f, 0f, 0f, 0f, "Magical", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
@@ -184,16 +189,14 @@ public class alternativeGameManager : MonoBehaviour
     {
         if (attackDictionary.TryGetValue(name, out var attack))
         {
-            // Update UI elements with attack information
             pickedActionIcon.GetComponent<Image>().sprite = attack.sprite; // Replace with your sprite logic
             pickedActionName.GetComponent<TMP_Text>().text = attack.attackName;
             pickedActionDescription.GetComponent<TMP_Text>().text = attack.description; // Replace with your description logic
-            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType} damage: {player.strength * attack.attackDamage}";
+            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType} damage: {attackDictionary[name].attackDamage}";
             pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber} in {attack.unlockStatName}";
         }
         else
         {
-            // Handle "None" or unknown attack case
             pickedActionIcon.GetComponent<Image>().sprite = noSprite;
             pickedActionName.GetComponent<TMP_Text>().text = "";
             pickedActionDescription.GetComponent<TMP_Text>().text = "";
@@ -202,6 +205,10 @@ public class alternativeGameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds a new enemy
+    /// </summary>
+    /// <param Enemy name="name"></param>
     public void NewEnemy(string name)
     {
         
@@ -222,7 +229,7 @@ public class alternativeGameManager : MonoBehaviour
         
         if (enemy != null) { Destroy(currentEnemy); }
         currentEnemy = Instantiate(enemyPrefab);
-        currentEnemy.transform.position = new Vector2(5, 3);
+        currentEnemy.transform.position = new Vector2(5, -1);
         currentEnemy.GetComponent<SpriteRenderer>().sprite = enemy.sprite;
 
         
@@ -247,6 +254,10 @@ public class alternativeGameManager : MonoBehaviour
                     }
                     
                     break;
+
+                case "Uppercut":
+                    enemy.getHit(attackDictionary[name].attackDamage, attackDictionary[name].damageType);
+                    break;
             }
         }
         
@@ -269,8 +280,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void ChangeGaugeBar()
     {
-        playerGaugeBarLocation.position = new Vector2((-960 + (player.gauge / 2)) / 108, 0);
-        playerGaugeBar.transform.localScale = new Vector2(player.gauge, 1);
+        playerGaugeBar.transform.localScale = new Vector2((player.gauge / player.gaugeBarSize) / amountOfGaugeBars, 1);
     }
 
     public void playerWon(int exp)
