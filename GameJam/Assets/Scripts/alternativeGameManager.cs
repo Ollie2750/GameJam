@@ -58,6 +58,8 @@ public class alternativeGameManager : MonoBehaviour
     public TMP_Text playerHealthText;
     public playerClass player;
     public GameObject playerBody;
+    public GameObject playerHealthBar;
+
 
     //enemy
     private float enemyScaling = 1f;
@@ -66,6 +68,7 @@ public class alternativeGameManager : MonoBehaviour
     public enemyClass enemy;
     public GameObject enemyPrefab;
     private GameObject currentEnemy;
+    public GameObject enemyHealthBar;
 
     public List<attackClass> playerAttacks = new List<attackClass>();
 
@@ -161,10 +164,13 @@ public class alternativeGameManager : MonoBehaviour
             player.updateBufs();
             
             ChangeGaugeBar();
+            ChangeHealthBarPlayer();
+            ChangeHealthBarEnemy();
             int hp = (int)player.health;
             playerHealthText.text = hp.ToString();
             hp = (int)enemy.health;
             enemyhealthText.text = hp.ToString();
+            
 
             if (enemy.health <= 0)
             {
@@ -319,6 +325,7 @@ public class alternativeGameManager : MonoBehaviour
                 case "Punch":
                     //play animation
                     player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    
                     break;
             }
         }
@@ -327,6 +334,16 @@ public class alternativeGameManager : MonoBehaviour
     public void ChangeGaugeBar()
     {
         playerGaugeBar.transform.localScale = new Vector2((player.gauge / player.gaugeBarSize) / amountOfGaugeBars, 1);
+    }
+
+    public void ChangeHealthBarPlayer()
+    {
+        playerHealthBar.transform.localScale = new Vector2(player.health / player.maxHealth, 1);
+    }
+
+    public void ChangeHealthBarEnemy()
+    {
+        enemyHealthBar.transform.localScale = new Vector2(enemy.health / enemy.maxHealth, 1);
     }
 
     public void playerWon(int exp)
