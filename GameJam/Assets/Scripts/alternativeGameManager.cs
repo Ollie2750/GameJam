@@ -10,6 +10,10 @@ public class alternativeGameManager : MonoBehaviour
 {
     public Sprite noSprite;
 
+    //GameOver screen objects
+    public GameObject gameOverCanvas;
+
+
     //Level up screen Objects
     public GameObject levelUpCanvas;
 
@@ -103,6 +107,7 @@ public class alternativeGameManager : MonoBehaviour
     {
         menuCanvas.SetActive(true);
         levelUpCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
             {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, "Lets intrduce them to our fist") },
@@ -166,6 +171,7 @@ public class alternativeGameManager : MonoBehaviour
                 menuCanvas.SetActive(false);
                 playerBody.SetActive(false);
 
+                gameOverCanvas.SetActive(true);
             }
         }
 
