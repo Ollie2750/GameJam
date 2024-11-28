@@ -325,17 +325,18 @@ public class alternativeGameManager : MonoBehaviour
         
         int statAmout = UnityEngine.Random.Range(3 * player.level, 6 * player.level);
         Debug.Log(statAmout);
-        foreach (int i in aLevelCard)
+        
+        for (int i = 0; i < aLevelCard.Count; i++)
         {
-            if (i == 2)
+            if (i == aLevelCard.Count - 1)
             {
-                anotherLevelCard[i] = statAmout;
+                aLevelCard[i] = statAmout;
             }
             else
             {
                 int amount = UnityEngine.Random.Range(0, statAmout);
+                aLevelCard[i] = amount;
                 statAmout -= amount;
-                anotherLevelCard[i] = amount;
             }
         }
 

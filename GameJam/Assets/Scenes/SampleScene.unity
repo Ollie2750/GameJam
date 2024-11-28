@@ -3183,7 +3183,7 @@ GameObject:
   - component: {fileID: 1032281381}
   - component: {fileID: 1032281380}
   m_Layer: 5
-  m_Name: Name (TMP)
+  m_Name: Action Name (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
