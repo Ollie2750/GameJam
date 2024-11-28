@@ -17,16 +17,17 @@ public class attackClass
     public string damageType1;
     public string damageType2;
     public Sprite sprite;
+    public Sprite buttonSprite;
     public string description;
 
     public attackClass(string attackName, float unlockStatNumber1, float unlockStatNumber2, 
         float gaugeCost ,float attackDamage1, float attackDamage2, float healing, float physicalDefenceIncrease, 
-        float magicalDefenceIncrease, float duration, string damageType1, string damageType2, Sprite sprite, string description)
+        float magicalDefenceIncrease, float duration, string damageType1, string damageType2, Sprite sprite, Sprite buttonSprite, string description)
     {
         this.attackName = attackName;
         this.unlockStatNumber1 = unlockStatNumber1;
         this.unlockStatNumber2 = unlockStatNumber2;
-        this.gaugeCost = gaugeCost * 100f;
+        this.gaugeCost = gaugeCost * 40f;
         this.attackDamage1 = attackDamage1;
         this.attackDamage2 = attackDamage2;
         this.healing = healing;
@@ -36,6 +37,7 @@ public class attackClass
         this.damageType2 = damageType2;
         this.duration = duration;
         this.sprite = sprite;
+        this.buttonSprite = buttonSprite;
         this.description = description;
 
     }

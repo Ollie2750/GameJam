@@ -56,7 +56,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public Transform playerGaugeBarLocation;
     public GameObject playerGaugeBar;
-    public int amountOfGaugeBars = 20;
+    public int amountOfGaugeBars = 5;
 
     private List<GameObject> attackAndAbilitieButtens = new List<GameObject>();
     
@@ -96,8 +96,11 @@ public class alternativeGameManager : MonoBehaviour
 
 
     //Attack sprites
-    public Sprite uppercutSprite;
     public Sprite punchSprite;
+    public Sprite punchButtonSprite;
+    public Sprite uppercutSprite;
+    public Sprite uppercutButtonSprite;
+
 
     //Enemy sprite
     public Sprite slimeSprite;
@@ -110,14 +113,14 @@ public class alternativeGameManager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, "Lets intrduce them to our fist") },
-            {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, "Duck and strike your opponent from underneath") },
-            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
-            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, "Break your opponents body with a force so great that it damages your own.") },
-            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
-            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
-            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
-            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
+            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, punchButtonSprite, "Lets intrduce them to our fist") },
+            {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, uppercutButtonSprite, "Duck and strike your opponent from underneath") },
+            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
+            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Break your opponents body with a force so great that it damages your own.") },
+            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
+            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
+            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
+            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
 
         };
 
@@ -237,10 +240,8 @@ public class alternativeGameManager : MonoBehaviour
 
             Button button = tempButton.GetComponent<Button>();
             button.onClick.AddListener(() => PlayerAttack(attack.attackName));
-
-
-            GameObject tempButtonChild = tempButton.transform.GetChild(0).gameObject;
-            tempButtonChild.GetComponent<TMP_Text>().text = attack.attackName;
+        
+            tempButton.GetComponent<Image>().sprite = attack.buttonSprite;
 
             attackAndAbilitieButtens.Add(tempButton);
         }
@@ -299,7 +300,7 @@ public class alternativeGameManager : MonoBehaviour
         
         if (enemy != null) { Destroy(currentEnemy); }
         currentEnemy = Instantiate(enemyPrefab);
-        currentEnemy.transform.position = new Vector2(5, -1);
+        currentEnemy.transform.position = new Vector2(5, -.4f);
         currentEnemy.GetComponent<SpriteRenderer>().sprite = enemy.sprite;
 
         enemyScaling += .1f;
@@ -371,7 +372,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void ChangeGaugeBar()
     {
-        playerGaugeBar.transform.localScale = new Vector2((player.gauge / player.gaugeBarSize) / amountOfGaugeBars, 1);
+        playerGaugeBar.transform.localScale = new Vector2((player.gauge / player.gaugeBarSize), 1);
     }
 
     public void ChangeHealthBarPlayer()
@@ -387,9 +388,9 @@ public class alternativeGameManager : MonoBehaviour
     public void playerWon(int exp)
     {
         player.exp += exp;
-        if (player.exp >= player.level * 10)
+        if (player.exp >= player.level * 3)
         {
-            player.exp -= player.level * 10;
+            player.exp -= player.level * 3;
             playerLevelUp();
         }
         else

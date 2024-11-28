@@ -11,7 +11,7 @@ public class playerClass : MonoBehaviour
     public float gaugeSpeed;
     public float gaugeSize;
     public float gauge;
-    public float gaugeBarSize = 100f;
+    public float gaugeBarSize = 40f;
     public float strength;
     public float intelligence;
     public float luck;

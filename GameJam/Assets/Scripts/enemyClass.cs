@@ -38,7 +38,7 @@ public class enemyClass
 
     public string enemyTurn()
     {
-        if (this.gauge < this.gaugeSize * 100f)
+        if (this.gauge < this.gaugeSize * 40f)
         {
             this.gauge += this.gaugeSpeed;
         }
