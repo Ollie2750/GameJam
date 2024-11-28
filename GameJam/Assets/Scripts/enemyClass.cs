@@ -15,11 +15,11 @@ public class enemyClass
     public float gauge;
     public float strength;
     public float intelligence;
-    public int exp;
+    public float exp;
     public List<attackClass> attackList = new List<attackClass>();
 
     public enemyClass(Sprite sprite,float health, float maxHealth, float physicalDefence, float magicalDefence, 
-        float gaugeSpeed, float gaugeSize, float gauge, float strength, float intelligence,int exp, List<attackClass> attackList)
+        float gaugeSpeed, float gaugeSize, float gauge, float strength, float intelligence,float exp, List<attackClass> attackList)
     {
         this.sprite = sprite;
         this.health = health;
@@ -57,13 +57,28 @@ public class enemyClass
     {
         if (type == "Physical")
         {
-            this.health -= damage - this.physicalDefence;
+            if (this.physicalDefence != 0)
+            {
+                this.health -= damage / this.physicalDefence;
+            }
+            else
+            {
+                this.health -= damage;
+            }
+
         }
         else if (type == "Magical")
         {
-            this.health -= damage - this.magicalDefence;
+            if (this.physicalDefence != 0)
+            {
+                this.health -= damage / this.magicalDefence;
+            }
+            else
+            {
+                this.health -= damage;
+            }
         }
-        
+
     }
 }
 

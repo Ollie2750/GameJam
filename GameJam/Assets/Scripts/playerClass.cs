@@ -20,6 +20,12 @@ public class playerClass : MonoBehaviour
 
     public Dictionary<string , float> stats;
     public List<attackClass> playerAttacks = new List<attackClass>();
+    public List<List<float>> strengthBuffs = new List<List<float>>();
+    public List<List<float>> intelligenceBuffs = new List<List<float>>();
+    public List<List<float>> physicalDefenceBuffs = new List<List<float>>();
+    public List<List<float>> magicalDefenceBuffs = new List<List<float>>();
+
+
 
     void Start()
     {
@@ -50,14 +56,107 @@ public class playerClass : MonoBehaviour
     {
         if (type == "Physical")
         {
-            this.health -= damage - this.physicalDefence;
+            if (this.physicalDefence != 0)
+            {
+                this.health -= damage / this.physicalDefence;
+            }
+            else
+            {
+                this.health -= damage;
+            }
+            
         }
         else if (type == "Magical")
         {
-            this.health -= damage - this.magicalDefence;
+            if (this.physicalDefence != 0)
+            {
+                this.health -= damage / this.magicalDefence;
+            }
+            else
+            {
+                this.health -= damage;
+            }
         }
 
     }
+
+    public void boostStat(float statAmount, string statType, float duration)
+    {
+        float fps = 50f;
+        switch (statType)
+        {
+            case "Strength":
+                this.strength += statAmount;
+                this.strengthBuffs.Add(new List<float> { statAmount, duration * fps});
+                break;
+            case "Intelligence":
+                this.intelligence += statAmount;
+                this.intelligenceBuffs.Add(new List<float> { statAmount, duration * fps });
+                break;
+            case "PhysicalDefence":
+                this.physicalDefence += statAmount;
+                this.physicalDefenceBuffs.Add(new List<float> { statAmount, duration * fps });
+                break;
+            case "MagicalDefence":
+                this.magicalDefence += statAmount;
+                this.magicalDefenceBuffs.Add(new List<float> { statAmount, duration * fps });
+                break;
+        }
+
+    }
+
+    public void updateBufs()
+    {
+        foreach (List<float> buff in strengthBuffs)
+        {
+            buff[1] -= 1f;
+        }
+        for (int i = 0; i < strengthBuffs.Count; i++)
+        {
+            if (strengthBuffs[i][1] <= 0f)
+            {
+                this.strength -= strengthBuffs[i][0];
+                strengthBuffs.RemoveAt(i);
+            }
+        }
+        foreach (List<float> buff in intelligenceBuffs)
+        {
+            buff[1] -= 1f;
+        }
+        for (int i = 0; i < intelligenceBuffs.Count; i++)
+        {
+            if (intelligenceBuffs[i][1] <= 0f)
+            {
+                this.intelligence -= intelligenceBuffs[i][0];
+                intelligenceBuffs.RemoveAt(i);
+            }
+        }
+        foreach (List<float> buff in physicalDefenceBuffs)
+        {
+            buff[1] -= 1f;
+        }
+        for (int i = 0; i < physicalDefenceBuffs.Count; i++)
+        {
+            if (physicalDefenceBuffs[i][1] <= 0f)
+            {
+                this.physicalDefence -= physicalDefenceBuffs[i][0];
+                physicalDefenceBuffs.RemoveAt(i);
+            }
+        }
+        foreach (List<float> buff in magicalDefenceBuffs)
+        {
+            buff[1] -= 1f;
+        }
+        for (int i = 0; i < magicalDefenceBuffs.Count; i++)
+        {
+            if (magicalDefenceBuffs[i][1] <= 0f)
+            {
+                this.magicalDefence -= magicalDefenceBuffs[i][0];
+                magicalDefenceBuffs.RemoveAt(i);
+            }
+        }
+    }
+
 
     public void updateStats()
     {

@@ -13,6 +13,26 @@ public class alternativeGameManager : MonoBehaviour
     //Level up screen Objects
     public GameObject levelUpCanvas;
 
+    //Card1
+    public Image card1Image1;
+    public Image card1Image2;
+    public TMP_Text card1Stat1;
+    public TMP_Text card1Stat2;
+    public TMP_Text card1Stat3;
+
+    //card2
+    public Image card2Image1;
+    public Image card2Image2;
+    public TMP_Text card2Stat1;
+    public TMP_Text card2Stat2;
+    public TMP_Text card2Stat3;
+
+    //card3
+    public Image card3Image1;
+    public Image card3Image2;
+    public TMP_Text card3Stat1;
+    public TMP_Text card3Stat2;
+    public TMP_Text card3Stat3;
 
     //Menu UI GameObjects
     public GameObject menuCanvas;
@@ -40,6 +60,8 @@ public class alternativeGameManager : MonoBehaviour
     public GameObject playerBody;
 
     //enemy
+    private float enemyScaling = 1f;
+
     public TMP_Text enemyhealthText;
     public enemyClass enemy;
     public GameObject enemyPrefab;
@@ -78,13 +100,14 @@ public class alternativeGameManager : MonoBehaviour
         levelUpCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", "", 0f, 1f, 1f, 0f, 0f, 0f, "Physical", punchSprite, "Lets intrduce them to our fist") },
-            {"Uppercut", new attackClass("Uppercut", "strength", 10f, 1f, 1.2f*player.strength, 0f, 0f, 0f, "Physical", uppercutSprite, "Duck and strike your opponent from underneath") },
-            {"Rising Spirit", new attackClass("RisingSpirit", "strength", 30f, 2f, 1.3f, 0f, 0f, 0f, "Physical", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
-            {"BodyBreaker", new attackClass("BodyBreaker", "strength", 50f, 4f, 3f, -(player.maxHealth), 0f, 0f, "Physical", noSprite, "Break your opponents body with a force so great that it damages your own.") },
-            {"Embers", new attackClass("Embers", "intelligence", 10f, 1f, 1.2f, 0f, 0f, 0f, "Magical", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
-            {"Thunderstrike", new attackClass("Thumderstrike", "intelligence", 20f, 1f, 1.4f, 0f, 0f, 0f, "Magical", noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
-            {"Frost Armor", new attackClass("Frost Armor", "intelligence", 35f, 0f, 0f, 0f, 0f, 1.4f, "Magical", noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
+            {"Punch", new attackClass("Punch", "","", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, "Lets intrduce them to our fist") },
+            {"Uppercut", new attackClass("Uppercut", "strength", "", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, "Duck and strike your opponent from underneath") },
+            {"Rising Spirit", new attackClass("Rising Spirit", "strength", "", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
+            {"BodyBreaker", new attackClass("BodyBreaker", "strength", "", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, "Break your opponents body with a force so great that it damages your own.") },
+            {"Runic Impact", new attackClass("RunicImpact", "Strenght", "Intelligence", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
+            {"Embers", new attackClass("Embers", "intelligence", "", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
+            {"Thunderstrike", new attackClass("Thumderstrike", "intelligence", "", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
+            {"Frost Armor", new attackClass("Frost Armor", "intelligence", "", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
 
         };
         foreach (var attack in attackDictionary.Values)
@@ -135,10 +158,13 @@ public class alternativeGameManager : MonoBehaviour
             {
                 EnemyAttack(anAttack);
             }
+            player.updateBufs();
             
             ChangeGaugeBar();
-            playerHealthText.text = player.health.ToString();
-            enemyhealthText.text = enemy.health.ToString();
+            int hp = (int)player.health;
+            playerHealthText.text = hp.ToString();
+            hp = (int)enemy.health;
+            enemyhealthText.text = hp.ToString();
 
             if (enemy.health <= 0)
             {
@@ -149,7 +175,7 @@ public class alternativeGameManager : MonoBehaviour
                 menuCanvas.SetActive(false);
                 currentEnemy.SetActive(false);
 
-                playerWon(enemy.exp);
+                playerWon((int)enemy.exp);
             } 
             else if (player.health <= 0)
             {
@@ -192,8 +218,8 @@ public class alternativeGameManager : MonoBehaviour
             pickedActionIcon.GetComponent<Image>().sprite = attack.sprite; // Replace with your sprite logic
             pickedActionName.GetComponent<TMP_Text>().text = attack.attackName;
             pickedActionDescription.GetComponent<TMP_Text>().text = attack.description; // Replace with your description logic
-            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType} damage: {attackDictionary[name].attackDamage}";
-            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber} in {attack.unlockStatName}";
+            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType1} damage: {attackDictionary[name].attackDamage1}";
+            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber1} in {attack.unlockStatName1}";
         }
         else
         {
@@ -215,12 +241,12 @@ public class alternativeGameManager : MonoBehaviour
         switch (name)
         {
             case "Slime":
-                enemy = new enemyClass(slimeSprite, 5f, 5f, 0f, 1f, .5f, 3f, 0f, 1f, 1f, 1, new List<attackClass>());
+                enemy = new enemyClass(slimeSprite, 5f * enemyScaling, 5f * enemyScaling, 0f * enemyScaling, 1f * enemyScaling, .5f * enemyScaling, 3f * enemyScaling, 0f * enemyScaling, 1f * enemyScaling, 1f * enemyScaling, 1f * enemyScaling, new List<attackClass>());
                 enemy.attackList.Clear();
                 enemy.attackList.Add(attackDictionary["Punch"]);
                 break;
             case "Goblin":
-                enemy = new enemyClass(goblinSprite, 8f, 8f, 2f, 1f, .8f, 3f, 0f, 2f, 0f, 2, new List<attackClass>());
+                enemy = new enemyClass(goblinSprite, 8f * enemyScaling, 8f * enemyScaling, 2f * enemyScaling, 1f * enemyScaling, .8f * enemyScaling, 3f * enemyScaling, 0f * enemyScaling, 2f * enemyScaling, 0f * enemyScaling, 2f * enemyScaling, new List<attackClass>());
                 enemy.attackList.Clear();
                 enemy.attackList.Add(attackDictionary["Punch"]);
                 break;
@@ -232,7 +258,7 @@ public class alternativeGameManager : MonoBehaviour
         currentEnemy.transform.position = new Vector2(5, -1);
         currentEnemy.GetComponent<SpriteRenderer>().sprite = enemy.sprite;
 
-        
+        enemyScaling += .1f;
     }
 
     public void PlayerAttack(string name)
@@ -246,17 +272,37 @@ public class alternativeGameManager : MonoBehaviour
                     //play animation
                     if (player.strength >= player.intelligence)
                     {
-                        enemy.getHit(player.strength, attackDictionary[name].damageType);
+                        enemy.getHit(player.strength, attackDictionary[name].damageType1);
                     }
                     else
                     {
-                        enemy.getHit(player.intelligence, attackDictionary[name].damageType);
+                        enemy.getHit(player.intelligence, attackDictionary[name].damageType1);
                     }
                     
                     break;
 
                 case "Uppercut":
-                    enemy.getHit(attackDictionary[name].attackDamage, attackDictionary[name].damageType);
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    break;
+                case "Rising Spirit":
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    break;
+                case "BodyBreaker":
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    player.getHit(player.health * .2f, attackDictionary[name].damageType1);
+                    break;
+                case "RunicImpact":
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    enemy.getHit(attackDictionary[name].attackDamage2 * player.intelligence, attackDictionary[name].damageType2);
+                    break;
+                case "Embers":
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    break;
+                case "ThunderStrike":
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    break;
+                case "Frost Armor":
+                    player.boostStat(attackDictionary[name].magicalDefenceIecrease, "MagicalDefence", attackDictionary[name].duration);
                     break;
             }
         }
@@ -272,7 +318,7 @@ public class alternativeGameManager : MonoBehaviour
             {
                 case "Punch":
                     //play animation
-                    player.getHit(attackDictionary[name].attackDamage, attackDictionary[name].damageType);
+                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
                     break;
             }
         }
@@ -313,6 +359,23 @@ public class alternativeGameManager : MonoBehaviour
         levelCard3StatType = setlevelCardStatTypes();
 
         //Show on cards in game
+        card1Image1.sprite = noSprite;
+        card1Image2.sprite = noSprite;
+        card1Stat1.text = (levelCard1StatType[0] + " : " + levelCard1[0]);
+        card1Stat2.text = (levelCard1StatType[1] + " : " + levelCard1[1]);
+        card1Stat3.text = ("Heal : " + levelCard1[2]);
+
+        card2Image1.sprite = noSprite;
+        card2Image2.sprite = noSprite;
+        card2Stat1.text = (levelCard2StatType[0] + " : " + levelCard2[0]);
+        card2Stat2.text = (levelCard2StatType[1] + " : " + levelCard2[1]);
+        card2Stat3.text = ("Heal : " + levelCard2[2]);
+
+        card3Image1.sprite = noSprite;
+        card3Image2.sprite = noSprite;
+        card3Stat1.text = (levelCard3StatType[0] + " : " + levelCard3[0]);
+        card3Stat2.text = (levelCard3StatType[1] + " : " + levelCard3[1]);
+        card3Stat3.text = ("Heal : " + levelCard3[2]);
 
 
         levelUpCanvas.SetActive(true);
@@ -321,26 +384,28 @@ public class alternativeGameManager : MonoBehaviour
     public List<int> setlevelCardAmounts()
     {
         List<int> aLevelCard = new List<int>() { 0, 0, 0 };
-        List<int> anotherLevelCard = new List<int> { 0, 0, 0 };
         
-        int statAmout = UnityEngine.Random.Range(3 * player.level, 6 * player.level);
-        Debug.Log(statAmout);
+        int statAmount = UnityEngine.Random.Range(3 * player.level, 6 * player.level);
+        
         
         for (int i = 0; i < aLevelCard.Count; i++)
         {
+
             if (i == aLevelCard.Count - 1)
             {
-                aLevelCard[i] = statAmout;
+                aLevelCard[i] = statAmount;
             }
             else
             {
-                int amount = UnityEngine.Random.Range(0, statAmout);
+                int amount = UnityEngine.Random.Range(0, statAmount);
+
                 aLevelCard[i] = amount;
-                statAmout -= amount;
+                statAmount -= amount;
+
             }
         }
 
-        return anotherLevelCard;
+        return aLevelCard;
     }
 
     public List<string> setlevelCardStatTypes()
@@ -357,9 +422,6 @@ public class alternativeGameManager : MonoBehaviour
         switch (cardNumber)
         {
             case 0:
-                Debug.Log(levelCard1StatType[0] + " : " + levelCard1[0]);
-                Debug.Log(levelCard1StatType[1] + " : " + levelCard1[1]);
-                Debug.Log(levelCard1[2]);
                 player.stats[levelCard1StatType[0]] += levelCard1[0];
                 player.stats[levelCard1StatType[1]] += levelCard1[1];
                 player.health += levelCard1[2];
@@ -376,7 +438,6 @@ public class alternativeGameManager : MonoBehaviour
                 break;
         }
         player.updateStats();
-        Debug.Log("Stats selected");
         levelUpCanvas.SetActive(false);
         menuCanvas.SetActive(true);
         playerBody.SetActive(true);
