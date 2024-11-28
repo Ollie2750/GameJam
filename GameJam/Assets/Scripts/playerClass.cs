@@ -49,7 +49,10 @@ public class playerClass : MonoBehaviour
         {
             gauge += gaugeSpeed;
         }
-
+        if (this.health > this.maxHealth)
+        {
+            this.health = this.maxHealth;
+        }
     }
 
     public void getHit(float damage, string type)

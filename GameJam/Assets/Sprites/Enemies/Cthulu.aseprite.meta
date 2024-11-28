@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b875a8632804fb40b3188f69b98f8af
+guid: 385de81f67462ab4789bedb30c42670b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Start
+  - name: Cthulu
     originalName: 
-    pivot: {x: 0.48760334, y: -0.5625}
+    pivot: {x: 0.516129, y: -0.21333334}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 121
-      height: 32
-    spriteID: 346fbcab5165ee340bf8009e84d8f0a7
+      width: 62
+      height: 75
+    spriteID: 5782106a983e21644aa03a8c94db5f01
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1055560650
-    name: Start
+    guid: -1539351413
+    name: Cthulu
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Start
+    - name: Cthulu
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 37
-        y: 18
-        width: 121
-        height: 32
-      spriteId: 346fbcab5165ee340bf8009e84d8f0a7
+        x: 0
+        y: 16
+        width: 62
+        height: 75
+      spriteId: 5782106a983e21644aa03a8c94db5f01
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 64}
+  canvasSize: {x: 64, y: 128}

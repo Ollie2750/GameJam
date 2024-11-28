@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b875a8632804fb40b3188f69b98f8af
+guid: 8af655e6a84823d44b5e82f60be938f0
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Start
+  - name: ButtonsNew
     originalName: 
-    pivot: {x: 0.48760334, y: -0.5625}
+    pivot: {x: 0.47605637, y: -0.24161077}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 121
-      height: 32
-    spriteID: 346fbcab5165ee340bf8009e84d8f0a7
+      width: 355
+      height: 298
+    spriteID: 176e9f6bcf9b5794bb2146bbe5accc6b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1055560650
-    name: Start
+    guid: -1560041323
+    name: ButtonsNew
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Start
+    - name: ButtonsNew
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 37
-        y: 18
-        width: 121
-        height: 32
-      spriteId: 346fbcab5165ee340bf8009e84d8f0a7
+        x: 31
+        y: 72
+        width: 355
+        height: 298
+      spriteId: 176e9f6bcf9b5794bb2146bbe5accc6b
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 64}
+  canvasSize: {x: 400, y: 400}

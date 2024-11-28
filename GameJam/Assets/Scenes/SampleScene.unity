@@ -2696,9 +2696,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: -100
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -4195,13 +4195,13 @@ MonoBehaviour:
   physicalDefence: 0
   magicalDefence: 0
   gaugeSpeed: 1
-  gaugeSize: 5
+  gaugeSize: 1
   gauge: 0
   gaugeBarSize: 100
-  strength: 1
-  intelligence: 1
+  strength: 50
+  intelligence: 50
   luck: 0
-  exp: 9
+  exp: 8
   level: 1
 --- !u!212 &1494053999
 SpriteRenderer:
@@ -4244,7 +4244,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8621466441188585539, guid: 428dcffa91e2eaf44b6a2a73436f9980, type: 3}
+  m_Sprite: {fileID: -4611843575890133954, guid: d427c0f8fc16b5344937649659119858, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4492,7 +4492,7 @@ RectTransform:
   m_GameObject: {fileID: 1739616943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2051743410}
@@ -4500,8 +4500,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: -109}
-  m_SizeDelta: {x: 320, y: 60}
+  m_AnchoredPosition: {x: 7, y: -186}
+  m_SizeDelta: {x: 121, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1739616945
 MonoBehaviour:
@@ -4579,7 +4579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5292560494225012192, guid: 0b875a8632804fb40b3188f69b98f8af, type: 3}
+  m_Sprite: {fileID: -5219553099330751532, guid: 0b875a8632804fb40b3188f69b98f8af, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5400,7 +5400,7 @@ MonoBehaviour:
   uppercutSprite: {fileID: 21300000, guid: 88e7e3b5e3c4536468e7562a8ec9ffe2, type: 3}
   punchSprite: {fileID: -3620781809597915160, guid: 1966395d5b22b2f47a7bed8236f8401f, type: 3}
   slimeSprite: {fileID: 8981847712189951137, guid: ebc50cd553ab416479b797fb964fc938, type: 3}
-  goblinSprite: {fileID: -7741817170769240110, guid: bd419e7b065b7734bb634370e58e8992, type: 3}
+  goblinSprite: {fileID: 5085877477530133662, guid: 896badc527e5a844aa91806237ec8874, type: 3}
 --- !u!1 &2051743409
 GameObject:
   m_ObjectHideFlags: 0
