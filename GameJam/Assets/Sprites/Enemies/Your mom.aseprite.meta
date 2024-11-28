@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b875a8632804fb40b3188f69b98f8af
+guid: da06c7e2ecf4c254f908bd92a8c92780
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Start
+  - name: Your mom
     originalName: 
-    pivot: {x: 0.48760334, y: -0.5625}
+    pivot: {x: 0.55172414, y: -0.04310345}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 121
-      height: 32
-    spriteID: 346fbcab5165ee340bf8009e84d8f0a7
+      width: 58
+      height: 116
+    spriteID: 07f40414a9337fd4ebdf28cad560adde
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1055560650
-    name: Start
+    guid: -1313093786
+    name: Your mom
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Start
+    - name: Your mom
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 37
-        y: 18
-        width: 121
-        height: 32
-      spriteId: 346fbcab5165ee340bf8009e84d8f0a7
+        x: 0
+        y: 5
+        width: 58
+        height: 116
+      spriteId: 07f40414a9337fd4ebdf28cad560adde
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 64}
+  canvasSize: {x: 64, y: 128}

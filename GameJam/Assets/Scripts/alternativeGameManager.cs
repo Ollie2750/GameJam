@@ -53,6 +53,8 @@ public class alternativeGameManager : MonoBehaviour
     public Transform playerGaugeBarLocation;
     public GameObject playerGaugeBar;
     public int amountOfGaugeBars = 20;
+
+    private List<GameObject> attackAndAbilitieButtens = new List<GameObject>();
     
     //player
     public TMP_Text playerHealthText;
@@ -103,50 +105,22 @@ public class alternativeGameManager : MonoBehaviour
         levelUpCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", "","", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, "Lets intrduce them to our fist") },
-            {"Uppercut", new attackClass("Uppercut", "strength", "", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, "Duck and strike your opponent from underneath") },
-            {"Rising Spirit", new attackClass("Rising Spirit", "strength", "", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
-            {"BodyBreaker", new attackClass("BodyBreaker", "strength", "", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, "Break your opponents body with a force so great that it damages your own.") },
-            {"Runic Impact", new attackClass("RunicImpact", "Strenght", "Intelligence", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
-            {"Embers", new attackClass("Embers", "intelligence", "", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
-            {"Thunderstrike", new attackClass("Thumderstrike", "intelligence", "", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
-            {"Frost Armor", new attackClass("Frost Armor", "intelligence", "", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
+            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, "Lets intrduce them to our fist") },
+            {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, "Duck and strike your opponent from underneath") },
+            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
+            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, "Break your opponents body with a force so great that it damages your own.") },
+            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
+            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
+            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
+            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
 
         };
-        foreach (var attack in attackDictionary.Values)
-        {
-            player.playerAttacks.Add(attack);
-        }
 
      
 
         enemyNameList = new List<string>() {"Slime","Goblin"};
 
-        foreach (attackClass attack in player.playerAttacks)
-        {
-
-            GameObject tempButton = Instantiate(attackButton);
-            tempButton.transform.SetParent(attackScrollBarContent.transform);
-            tempButton.transform.localScale = Vector2.one;
-
-
-            EventTrigger.Entry pointerEnterEntry = new EventTrigger.Entry();
-            pointerEnterEntry.eventID = EventTriggerType.PointerEnter;
-            pointerEnterEntry.callback.AddListener((data) => ChangeMenu(attack.attackName));
-            tempButton.GetComponent<EventTrigger>().triggers.Add(pointerEnterEntry);
-
-            EventTrigger.Entry pointerExitEntry = new EventTrigger.Entry();
-            pointerExitEntry.eventID = EventTriggerType.PointerExit;
-            pointerExitEntry.callback.AddListener((data) => ChangeMenu("None"));
-            tempButton.GetComponent<EventTrigger>().triggers.Add(pointerExitEntry);
-
-            Button button = tempButton.GetComponent<Button>();
-            button.onClick.AddListener(() => PlayerAttack(attack.attackName));
-
-
-            GameObject tempButtonChild = tempButton.transform.GetChild(0).gameObject;
-            tempButtonChild.GetComponent<TMP_Text>().text = attack.attackName;
-        }
+        
 
     }
 
@@ -208,6 +182,64 @@ public class alternativeGameManager : MonoBehaviour
         NewEnemy(enemyNameList[UnityEngine.Random.Range(0, enemyNameList.Count)]);
 
         currentEnemy.SetActive(true);
+
+        player.playerAttacks.Clear();
+
+        foreach (var attack in attackDictionary)
+        {
+            bool type1 = false;
+            bool type2 = false;
+            
+            if (player.strength >= attackDictionary[attack.Key].unlockStatNumber1)
+            {
+                type1 = true;
+            }
+            if (player.intelligence >= attackDictionary[attack.Key].unlockStatNumber2)
+            {
+                type2 = true;
+            }
+
+            if (type1 && type2)
+            {
+                player.playerAttacks.Add(attackDictionary[attack.Key]);
+            }
+        }
+
+        foreach (GameObject aButten in attackAndAbilitieButtens)
+        {
+            Destroy(aButten);
+        }
+        attackAndAbilitieButtens.Clear();
+
+        foreach (attackClass attack in player.playerAttacks)
+        {
+
+            GameObject tempButton = Instantiate(attackButton);
+            tempButton.transform.SetParent(attackScrollBarContent.transform);
+            tempButton.transform.localScale = Vector2.one;
+
+
+            EventTrigger.Entry pointerEnterEntry = new EventTrigger.Entry();
+            pointerEnterEntry.eventID = EventTriggerType.PointerEnter;
+            pointerEnterEntry.callback.AddListener((data) => ChangeMenu(attack.attackName));
+            tempButton.GetComponent<EventTrigger>().triggers.Add(pointerEnterEntry);
+
+            EventTrigger.Entry pointerExitEntry = new EventTrigger.Entry();
+            pointerExitEntry.eventID = EventTriggerType.PointerExit;
+            pointerExitEntry.callback.AddListener((data) => ChangeMenu("None"));
+            tempButton.GetComponent<EventTrigger>().triggers.Add(pointerExitEntry);
+
+            Button button = tempButton.GetComponent<Button>();
+            button.onClick.AddListener(() => PlayerAttack(attack.attackName));
+
+
+            GameObject tempButtonChild = tempButton.transform.GetChild(0).gameObject;
+            tempButtonChild.GetComponent<TMP_Text>().text = attack.attackName;
+
+            attackAndAbilitieButtens.Add(tempButton);
+        }
+
+
         inCombat = true;
 
     }
@@ -225,7 +257,7 @@ public class alternativeGameManager : MonoBehaviour
             pickedActionName.GetComponent<TMP_Text>().text = attack.attackName;
             pickedActionDescription.GetComponent<TMP_Text>().text = attack.description; // Replace with your description logic
             pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType1} damage: {attackDictionary[name].attackDamage1}";
-            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber1} in {attack.unlockStatName1}";
+            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber1} in strength";
         }
         else
         {
@@ -269,7 +301,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void PlayerAttack(string name)
     {
-        if (player.gauge > attackDictionary[name].gaugeCost)
+        if (player.gauge >= attackDictionary[name].gaugeCost)
         {
             player.gauge -= attackDictionary[name].gaugeCost;
             switch (name)
@@ -297,14 +329,14 @@ public class alternativeGameManager : MonoBehaviour
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     player.getHit(player.health * .2f, attackDictionary[name].damageType1);
                     break;
-                case "RunicImpact":
+                case "Runic Impact":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     enemy.getHit(attackDictionary[name].attackDamage2 * player.intelligence, attackDictionary[name].damageType2);
                     break;
                 case "Embers":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     break;
-                case "ThunderStrike":
+                case "Thunderstrike":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     break;
                 case "Frost Armor":
@@ -430,7 +462,10 @@ public class alternativeGameManager : MonoBehaviour
         List<string> aLevelCard = new List<string>();
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
-
+        if(player.gaugeSize >= 5f && statList[statList.Count - 2] == "Gauge Size")
+        {
+            statList.RemoveAt(statList.Count - 2);
+        }
         return aLevelCard;
     }
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b875a8632804fb40b3188f69b98f8af
+guid: cc977ef197ef94646a3723e62efadf48
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Start
+  - name: Evil soldier
     originalName: 
-    pivot: {x: 0.48760334, y: -0.5625}
+    pivot: {x: 0.5283019, y: -0.016393442}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 121
-      height: 32
-    spriteID: 346fbcab5165ee340bf8009e84d8f0a7
+      width: 53
+      height: 122
+    spriteID: 021861d7f37e3bf45835a08dfd152ccb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1055560650
-    name: Start
+    guid: -275972202
+    name: Evil soldier
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Start
+    - name: Evil soldier
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 37
-        y: 18
-        width: 121
-        height: 32
-      spriteId: 346fbcab5165ee340bf8009e84d8f0a7
+        x: 4
+        y: 2
+        width: 53
+        height: 122
+      spriteId: 021861d7f37e3bf45835a08dfd152ccb
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 64}
+  canvasSize: {x: 64, y: 128}

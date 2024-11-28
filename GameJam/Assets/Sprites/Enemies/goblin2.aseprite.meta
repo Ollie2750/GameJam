@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b875a8632804fb40b3188f69b98f8af
+guid: b2c875332e326b5459e0d599a6d61e1e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Start
+  - name: goblin2
     originalName: 
-    pivot: {x: 0.48760334, y: -0.5625}
+    pivot: {x: 0.49206352, y: -0.0625}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 121
-      height: 32
-    spriteID: 346fbcab5165ee340bf8009e84d8f0a7
+      width: 63
+      height: 96
+    spriteID: 628df5a353bb504468291e2b317a6b89
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1055560650
-    name: Start
+    guid: 1517685287
+    name: goblin2
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Start
+    - name: goblin2
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 37
-        y: 18
-        width: 121
-        height: 32
-      spriteId: 346fbcab5165ee340bf8009e84d8f0a7
+        x: 1
+        y: 6
+        width: 63
+        height: 96
+      spriteId: 628df5a353bb504468291e2b317a6b89
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 64}
+  canvasSize: {x: 64, y: 128}

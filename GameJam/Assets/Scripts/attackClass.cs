@@ -5,8 +5,6 @@ using UnityEngine;
 public class attackClass
 {
     public string attackName;
-    public string unlockStatName1;
-    public string unlockStatName2;
     public float unlockStatNumber1;
     public float unlockStatNumber2;
     public float gaugeCost;
@@ -21,13 +19,11 @@ public class attackClass
     public Sprite sprite;
     public string description;
 
-    public attackClass(string attackName, string unlockStatName1, string unlockStatName2, float unlockStatNumber1, float unlockStatNumber2, 
+    public attackClass(string attackName, float unlockStatNumber1, float unlockStatNumber2, 
         float gaugeCost ,float attackDamage1, float attackDamage2, float healing, float physicalDefenceIncrease, 
         float magicalDefenceIncrease, float duration, string damageType1, string damageType2, Sprite sprite, string description)
     {
         this.attackName = attackName;
-        this.unlockStatName1 = unlockStatName1;
-        this.unlockStatName2 = unlockStatName2;
         this.unlockStatNumber1 = unlockStatNumber1;
         this.unlockStatNumber2 = unlockStatNumber2;
         this.gaugeCost = gaugeCost * 100f;
