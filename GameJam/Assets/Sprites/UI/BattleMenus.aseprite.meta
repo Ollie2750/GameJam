@@ -149,10 +149,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 7
-      y: 149
-      width: 125
-      height: 116
+      x: 4
+      y: 4
+      width: 101
+      height: 94
     spriteID: e08b2cb063be3c048b17c06e02df196b
     spriteBone: []
     spriteOutline: []
@@ -169,10 +169,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 136
-      y: 149
-      width: 125
-      height: 123
+      x: 120
+      y: 17
+      width: 37
+      height: 25
     spriteID: 45a5c409d759df24e9cf25f48aafefd5
     spriteBone: []
     spriteOutline: []
@@ -189,31 +189,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 283
-      y: 149
-      width: 33
+      x: 182
+      y: 14
+      width: 35
       height: 32
     spriteID: 1242b600ce8a9954685b14c396b228d2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: BattleMenus_3
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 325
-      height: 86
-    spriteID: 8495276ae0f0f7d478efc139f7065c95
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -234,10 +214,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 314
-        y: 365
-        width: 81
-        height: 32
+        x: 13
+        y: 16
+        width: 213
+        height: 94
       spriteId: 756745485afb4604bb5231ad9a333256
     linkedCells: []
     parentIndex: -1
