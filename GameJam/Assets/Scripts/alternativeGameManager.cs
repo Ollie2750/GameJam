@@ -15,6 +15,7 @@ public class alternativeGameManager : MonoBehaviour
 
     //Level up screen Objects
     public GameObject levelUpCanvas;
+    private int cardSelected = 0;
 
     [Header("Cards")]
     //Card1
@@ -41,6 +42,7 @@ public class alternativeGameManager : MonoBehaviour
     //Menu UI GameObjects
     [Header("Menu UI GameObjects")]
     public GameObject menuCanvas;
+    public GameObject inCombatObjects;
 
     public GameObject inCombatButton;
     public GameObject menu;
@@ -50,7 +52,6 @@ public class alternativeGameManager : MonoBehaviour
     public GameObject pickedActionAction;
     public GameObject pickedActionRequirements;
 
-    public GameObject attackMenuButton;
     public GameObject attackMenu;
     public GameObject attackScrollBarContent;
     public GameObject attackButton;
@@ -60,6 +61,15 @@ public class alternativeGameManager : MonoBehaviour
     public int amountOfGaugeBars = 5;
 
     private List<GameObject> attackAndAbilitieButtens = new List<GameObject>();
+
+    public TMP_Text playerStatMaxHealth;
+    public TMP_Text playerStatStrength;
+    public TMP_Text playerStatIntelligence;
+    public TMP_Text playerStatPhysicalDefence;
+    public TMP_Text playerStatMagicalDefence;
+    public TMP_Text playerStatGaugeSize;
+    public TMP_Text playerStatGaugeSpeed;
+    public TMP_Text playerStatLuck;
 
     [Header("Player")]
     //player
@@ -98,6 +108,10 @@ public class alternativeGameManager : MonoBehaviour
     private List<string> levelCard2StatType = new List<string>();
     private List<string> levelCard3StatType = new List<string>();
 
+    public Image levelCard1Image;
+    public Image levelCard2Image;
+    public Image levelCard3Image;
+
 
     [Header("Sprites")]
     //Placeholder sprite
@@ -126,12 +140,14 @@ public class alternativeGameManager : MonoBehaviour
 
     void Start()
     {
+        playerBody.SetActive(true);
         menuCanvas.SetActive(true);
         levelUpCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
+        inCombatObjects.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, punchButtonSprite, "Lets intrduce them to our fist", punchSFX) },
+            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical", "", punchSprite, punchButtonSprite, "Lets intrduce them to our fist", punchSFX) },
             {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, uppercutButtonSprite, "Duck and strike your opponent from underneath", uppercutSFX) },
             {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength", risingSpiritSFX) },
             {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Break your opponents body with a force so great that it damages your own.", bodyBreakerSFX) },
@@ -146,7 +162,7 @@ public class alternativeGameManager : MonoBehaviour
 
         enemyNameList = new List<string>() {"Slime","Goblin"};
 
-        
+        GenerateScrollButtons();
 
     }
 
@@ -175,7 +191,6 @@ public class alternativeGameManager : MonoBehaviour
             if (enemy.health <= 0)
             {
                 inCombat = false;
-                attackMenuButton.SetActive(false);
                 attackMenu.SetActive(false);
                 menu.SetActive(false);
                 menuCanvas.SetActive(false);
@@ -186,7 +201,6 @@ public class alternativeGameManager : MonoBehaviour
             else if (player.health <= 0)
             {
                 inCombat = false;
-                attackMenuButton.SetActive(false);
                 attackMenu.SetActive(false);
                 menu.SetActive(false);
                 menuCanvas.SetActive(false);
@@ -202,13 +216,28 @@ public class alternativeGameManager : MonoBehaviour
     public void StartCombat()
     {
         inCombatButton.SetActive(false);
-        attackMenuButton.SetActive(true);
         menu.SetActive(true);
         attackMenu.SetActive(true);
+        inCombatObjects.SetActive(true);
 
         NewEnemy(enemyNameList[UnityEngine.Random.Range(0, enemyNameList.Count)]);
 
         currentEnemy.SetActive(true);
+
+        inCombat = true;
+
+    }
+
+    public void GenerateScrollButtons()
+    {
+        playerStatMaxHealth.text = ("Max health: " + player.health);
+        playerStatStrength.text = ("Strength: " + player.strength);
+        playerStatIntelligence.text = ("Intelligence: " + player.intelligence);
+        playerStatPhysicalDefence.text = ("Physical defence: " + player.physicalDefence);
+        playerStatMagicalDefence.text = ("Magical defence: " + player.magicalDefence);
+        playerStatGaugeSize.text = ("Gauge size: " + player.gaugeSize);
+        playerStatGaugeSpeed.text = ("Gauge speed: " + player.gaugeSpeed);
+        playerStatLuck.text = ("Luck: " + player.luck);
 
         player.playerAttacks.Clear();
 
@@ -216,7 +245,7 @@ public class alternativeGameManager : MonoBehaviour
         {
             bool type1 = false;
             bool type2 = false;
-            
+
             if (player.strength >= attackDictionary[attack.Key].unlockStatNumber1)
             {
                 type1 = true;
@@ -231,7 +260,6 @@ public class alternativeGameManager : MonoBehaviour
                 player.playerAttacks.Add(attackDictionary[attack.Key]);
             }
         }
-
         foreach (GameObject aButten in attackAndAbilitieButtens)
         {
             Destroy(aButten);
@@ -258,15 +286,11 @@ public class alternativeGameManager : MonoBehaviour
 
             Button button = tempButton.GetComponent<Button>();
             button.onClick.AddListener(() => PlayerAttack(attack.attackName));
-        
+
             tempButton.GetComponent<Image>().sprite = attack.buttonSprite;
 
             attackAndAbilitieButtens.Add(tempButton);
         }
-
-
-        inCombat = true;
-
     }
 
     public void ShowAttackMenu()
@@ -281,8 +305,8 @@ public class alternativeGameManager : MonoBehaviour
             pickedActionIcon.GetComponent<Image>().sprite = attack.sprite; // Replace with your sprite logic
             pickedActionName.GetComponent<TMP_Text>().text = attack.attackName;
             pickedActionDescription.GetComponent<TMP_Text>().text = attack.description; // Replace with your description logic
-            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType1} damage: {attackDictionary[name].attackDamage1}";
-            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber1} in strength";
+            pickedActionAction.GetComponent<TMP_Text>().text = $"{attack.damageType1} damage: {attackDictionary[name].attackDamage1 * player.strength} {attack.damageType2} damage: {attackDictionary[name].attackDamage2 * player.intelligence}";
+            pickedActionRequirements.GetComponent<TMP_Text>().text = $"Needs {attack.unlockStatNumber1} in strength and {attack.unlockStatNumber2} in intelligence";
         }
         else
         {
@@ -341,38 +365,38 @@ public class alternativeGameManager : MonoBehaviour
                     {
                         enemy.getHit(player.intelligence, attackDictionary[name].damageType1);
                     }
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
 
                 case "Uppercut":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Rising Spirit":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "BodyBreaker":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     player.getHit(player.health * .2f, attackDictionary[name].damageType1);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Runic Impact":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     enemy.getHit(attackDictionary[name].attackDamage2 * player.intelligence, attackDictionary[name].damageType2);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Embers":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Thunderstrike":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Frost Armor":
                     player.boostStat(attackDictionary[name].magicalDefenceIecrease, "MagicalDefence", attackDictionary[name].duration);
-                    soundEffects.PlaySFX(attackDictionary[name].SFX);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
             }
         }
@@ -402,12 +426,26 @@ public class alternativeGameManager : MonoBehaviour
 
     public void ChangeHealthBarPlayer()
     {
-        playerHealthBar.transform.localScale = new Vector2(player.health / player.maxHealth, 1);
+        if (player.health <= 0f)
+        {
+            playerHealthBar.transform.localScale = new Vector2(0, 1);
+        }
+        else
+        {
+            playerHealthBar.transform.localScale = new Vector2(player.health / player.maxHealth, 1);
+        }
     }
 
     public void ChangeHealthBarEnemy()
     {
-        enemyHealthBar.transform.localScale = new Vector2(enemy.health / enemy.maxHealth, 1);
+        if (enemy.health <= 0f)
+        {
+            enemyHealthBar.transform.localScale = new Vector2(0, 1);
+        }
+        else
+        {
+            enemyHealthBar.transform.localScale = new Vector2(enemy.health / enemy.maxHealth, 1);
+        }
     }
 
     public void playerWon(int exp)
@@ -422,6 +460,8 @@ public class alternativeGameManager : MonoBehaviour
         {
             menuCanvas.SetActive(true);
             inCombatButton.SetActive(true);
+            menu.SetActive(true);
+            attackMenu.SetActive(true);
             enemyPrefab.SetActive(true);
         }
     }
@@ -503,7 +543,30 @@ public class alternativeGameManager : MonoBehaviour
 
     public void SelectStats(int cardNumber)
     {
+        cardSelected = cardNumber;
         switch (cardNumber)
+        {
+            case 0:
+                levelCard1Image.color = new Color32(160, 160, 160, 255);
+                levelCard2Image.color = new Color32(255,255,255, 255);
+                levelCard3Image.color = new Color32(255,255,255, 255);
+                break;
+            case 1:
+                levelCard1Image.color = new Color32(255, 255, 255, 255);
+                levelCard2Image.color = new Color32(160, 160, 160, 255);
+                levelCard3Image.color = new Color32(255, 255, 255, 255);
+                break;
+            case 2:
+                levelCard1Image.color = new Color32(255, 255, 255, 255);
+                levelCard2Image.color = new Color32(255, 255, 255, 255);
+                levelCard3Image.color = new Color32(160, 160, 160, 255);
+                break;
+        }
+    }
+
+    public void ConfirmChoice()
+    {
+        switch (cardSelected)
         {
             case 0:
                 player.stats[levelCard1StatType[0]] += levelCard1[0];
@@ -521,12 +584,15 @@ public class alternativeGameManager : MonoBehaviour
                 player.health += levelCard3[2];
                 break;
         }
+        menu.SetActive(true);
+        attackMenu.SetActive(true);
         player.updateStats();
         levelUpCanvas.SetActive(false);
         menuCanvas.SetActive(true);
         playerBody.SetActive(true);
         inCombatButton.SetActive(true);
-
+        inCombatObjects.SetActive(false);
+        GenerateScrollButtons();
     }
 
     //Skal måske ikke bruges
