@@ -197,9 +197,9 @@ public class alternativeGameManager : MonoBehaviour
             {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", RisingSpirit, RisingSpiritButton, "Bolster your booty and spirit to strike your opponent and raise your strength", risingSpiritSFX) },
             {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", BodyBreaker, BodyBreakerButton, "Break your opponents body with a force so great that it damages your own.", bodyBreakerSFX) },
             {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", RunicImpact, RunicImpactButtom, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast", runicImpactSFX) },
-            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", Embers, EmbersButton, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
-            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", ThunderStrike, ThunderStrikeButton, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
-            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", FrostArmour, FrostAmourButton, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
+            {"Embers", new attackClass("Embers", 0f, 10f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", Embers, EmbersButton, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
+            {"Thunderstrike", new attackClass("Thunderstrike", 0f, 20f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", ThunderStrike, ThunderStrikeButton, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
+            {"Frost Armor", new attackClass("Frost Armor", 0f, 35f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", FrostArmour, FrostAmourButton, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
             {"Fireball", new attackClass("Fireball", 0f, 80f, 5f, 0f, 2f, 0f, 0f, 0f, 0f, "", "Magical", Fireball, FireballButton, "Buuuuuuuurn!!!!!!", fireballDragonSFX) }
         };
 
@@ -226,7 +226,7 @@ public class alternativeGameManager : MonoBehaviour
 
 
 
-        enemyNameList = new List<string>() {"Dragon" };
+        enemyNameList = new List<string>() { "Slime", "Goblin", "Witch" };
 
         GenerateScrollButtons();
 
