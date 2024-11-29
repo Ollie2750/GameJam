@@ -2665,7 +2665,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1990460859}
         m_TargetAssemblyTypeName: alternativeGameManager, Assembly-CSharp
-        m_MethodName: ShowAttackMenu
+        m_MethodName: ButtonSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4608,7 +4608,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 284eef356f40ce845891fc147ab6ad78, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 54bf3dae24b2dfb4cad55c03f7dd8ff4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
@@ -5552,6 +5552,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288455487}
   m_CullTransparentMesh: 1
+--- !u!1 &1298419451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1298419453}
+  - component: {fileID: 1298419452}
+  m_Layer: 0
+  m_Name: ButtonSFXPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1298419452
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298419451}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1298419453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298419451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.60556483, y: 0.85458046, z: 1611.5745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334605932
 GameObject:
   m_ObjectHideFlags: 0
@@ -6156,7 +6284,7 @@ MonoBehaviour:
   strength: 1
   intelligence: 1
   luck: 0
-  exp: 0
+  exp: 9
   level: 1
 --- !u!212 &1494053999
 SpriteRenderer:
@@ -7909,6 +8037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921964838}
   - component: {fileID: 1921964837}
+  - component: {fileID: 1921964839}
   m_Layer: 0
   m_Name: baggrund
   m_TagString: Untagged
@@ -7983,6 +8112,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1921964839
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921964836}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1929839558
 GameObject:
   m_ObjectHideFlags: 0
@@ -8594,6 +8819,7 @@ MonoBehaviour:
   pickedActionDescription: {fileID: 84433911}
   pickedActionAction: {fileID: 119729030}
   pickedActionRequirements: {fileID: 1866810018}
+  background: {fileID: 1921964836}
   attackMenu: {fileID: 379777438}
   attackScrollBarContent: {fileID: 825125110}
   attackButton: {fileID: 8511469513256060572, guid: dc7dd0242bfb20643add8c7a78022393, type: 3}
@@ -8626,14 +8852,18 @@ MonoBehaviour:
   uppercutButtonSprite: {fileID: -8497964341708218842, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
   slimeSprite: {fileID: 8981847712189951137, guid: ebc50cd553ab416479b797fb964fc938, type: 3}
   goblinSprite: {fileID: 5085877477530133662, guid: 896badc527e5a844aa91806237ec8874, type: 3}
-  punchSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  uppercutSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  risingSpiritSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  bodyBreakerSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  runicImpactSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  embersSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
-  thunderstrikeSFX: {fileID: 8300000, guid: 8fb8ff9114dfaec4e95d0b5eb0840cc5, type: 3}
-  frostArmorSFX: {fileID: 8300000, guid: da843390e35c7044ab553c159c1fa71e, type: 3}
+  buttonSFXPlayer: {fileID: 1298419451}
+  punchSFX: {fileID: 8300000, guid: 6879443279838a6478c571c4837bc8e6, type: 3}
+  uppercutSFX: {fileID: 8300000, guid: 36c935d268fe37a4883976cfebde7b18, type: 3}
+  risingSpiritSFX: {fileID: 8300000, guid: 6317f7dfc4ab11d4580a332a72c24edc, type: 3}
+  bodyBreakerSFX: {fileID: 8300000, guid: ac074178f4c27204e92fe88107e24c3f, type: 3}
+  runicImpactSFX: {fileID: 8300000, guid: 00fda3ceaffccac42ac41605b9ebc22a, type: 3}
+  embersSFX: {fileID: 8300000, guid: 052a77e0360198a4eac01e45871e6b1d, type: 3}
+  thunderstrikeSFX: {fileID: 8300000, guid: 8f542b3de3a2d1043aa59d0234488fb0, type: 3}
+  frostArmorSFX: {fileID: 8300000, guid: 119fe9b5dbc12d9468940fef7b3d06ab, type: 3}
+  buttonSFX: {fileID: 8300000, guid: ebeeaca3613e2d347846ad6b2cdb3735, type: 3}
+  lvlUpSFX: {fileID: 8300000, guid: 8cd5a968f984e56449cf101218d1803e, type: 3}
+  PlayerDeathSFX: {fileID: 8300000, guid: 1fc9364c2eeff704492d38993cd32b03, type: 3}
 --- !u!114 &1990460860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8646,6 +8876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8b87d64ac07134e86a525ea8e3abb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonSFXPlayer: {fileID: 1298419451}
+  buttonSFX: {fileID: 8300000, guid: ebeeaca3613e2d347846ad6b2cdb3735, type: 3}
 --- !u!1 &1994601811
 GameObject:
   m_ObjectHideFlags: 0
@@ -9003,3 +9235,4 @@ SceneRoots:
   - {fileID: 1689647381}
   - {fileID: 333689659}
   - {fileID: 1118595967}
+  - {fileID: 1298419453}

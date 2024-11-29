@@ -51,6 +51,7 @@ public class alternativeGameManager : MonoBehaviour
     public GameObject pickedActionDescription;
     public GameObject pickedActionAction;
     public GameObject pickedActionRequirements;
+    public GameObject background;
 
     public GameObject attackMenu;
     public GameObject attackScrollBarContent;
@@ -99,7 +100,7 @@ public class alternativeGameManager : MonoBehaviour
 
     [Header("Stat cards")]
     //Stat cards
-    private List<string> statList = new List<string>() {"Max Health","Strength","Intelligence","Physical Defence","Magical Defence", "Gauge Speed", "Gauge Size", "Luck" };
+    private List<string> statList = new List<string>() { "Max Health", "Strength", "Intelligence", "Physical Defence", "Magical Defence", "Gauge Speed", "Gauge Size", "Luck" };
     private List<int> levelCard1 = new List<int>();
     private List<int> levelCard2 = new List<int>();
     private List<int> levelCard3 = new List<int>();
@@ -129,6 +130,7 @@ public class alternativeGameManager : MonoBehaviour
     public Sprite goblinSprite;
 
     [Header("-----SFX-----")]
+    public GameObject buttonSFXPlayer;
     public AudioClip punchSFX;
     public AudioClip uppercutSFX;
     public AudioClip risingSpiritSFX;
@@ -137,10 +139,14 @@ public class alternativeGameManager : MonoBehaviour
     public AudioClip embersSFX;
     public AudioClip thunderstrikeSFX;
     public AudioClip frostArmorSFX;
+    public AudioClip buttonSFX;
+    public AudioClip lvlUpSFX;
+    public AudioClip PlayerDeathSFX;
 
     void Start()
     {
-        playerBody.SetActive(true);
+        buttonSFXPlayer.GetComponent<AudioSource>().PlayOneShot(buttonSFX);
+        playerBody.GetComponent<SpriteRenderer>().enabled = true;
         menuCanvas.SetActive(true);
         levelUpCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
@@ -158,9 +164,9 @@ public class alternativeGameManager : MonoBehaviour
 
         };
 
-     
 
-        enemyNameList = new List<string>() {"Slime","Goblin"};
+
+        enemyNameList = new List<string>() { "Slime", "Goblin" };
 
         GenerateScrollButtons();
 
@@ -178,7 +184,7 @@ public class alternativeGameManager : MonoBehaviour
                 EnemyAttack(anAttack);
             }
             player.updateBufs();
-            
+
             ChangeGaugeBar();
             ChangeHealthBarPlayer();
             ChangeHealthBarEnemy();
@@ -186,7 +192,7 @@ public class alternativeGameManager : MonoBehaviour
             playerHealthText.text = hp.ToString();
             hp = (int)enemy.health;
             enemyhealthText.text = hp.ToString();
-            
+
 
             if (enemy.health <= 0)
             {
@@ -197,15 +203,15 @@ public class alternativeGameManager : MonoBehaviour
                 currentEnemy.SetActive(false);
 
                 playerWon((int)enemy.exp);
-            } 
+            }
             else if (player.health <= 0)
             {
+                playerBody.GetComponent<AudioSource>().PlayOneShot(PlayerDeathSFX);
                 inCombat = false;
                 attackMenu.SetActive(false);
                 menu.SetActive(false);
                 menuCanvas.SetActive(false);
-                playerBody.SetActive(false);
-
+                playerBody.GetComponent<SpriteRenderer>().enabled = false;
                 gameOverCanvas.SetActive(true);
             }
         }
@@ -215,6 +221,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void StartCombat()
     {
+        ButtonSFX();
         inCombatButton.SetActive(false);
         menu.SetActive(true);
         attackMenu.SetActive(true);
@@ -296,6 +303,7 @@ public class alternativeGameManager : MonoBehaviour
     public void ShowAttackMenu()
     {
         attackMenu.SetActive(true);
+        ButtonSFX();
     }
 
     public void ChangeMenu(string name)
@@ -324,7 +332,7 @@ public class alternativeGameManager : MonoBehaviour
     /// <param Enemy name="name"></param>
     public void NewEnemy(string name)
     {
-        
+
         switch (name)
         {
             case "Slime":
@@ -338,8 +346,8 @@ public class alternativeGameManager : MonoBehaviour
                 enemy.attackList.Add(attackDictionary["Punch"]);
                 break;
         }
-        
-        
+
+
         if (enemy != null) { Destroy(currentEnemy); }
         currentEnemy = Instantiate(enemyPrefab);
         currentEnemy.transform.position = new Vector2(5, -.4f);
@@ -350,6 +358,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void PlayerAttack(string name)
     {
+        ButtonSFX();
         if (player.gauge >= attackDictionary[name].gaugeCost)
         {
             player.gauge -= attackDictionary[name].gaugeCost;
@@ -400,7 +409,7 @@ public class alternativeGameManager : MonoBehaviour
                     break;
             }
         }
-        
+
     }
 
     public void EnemyAttack(string name)
@@ -413,7 +422,7 @@ public class alternativeGameManager : MonoBehaviour
                 case "Punch":
                     //play animation
                     player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
-                    
+
                     break;
             }
         }
@@ -468,8 +477,9 @@ public class alternativeGameManager : MonoBehaviour
 
     public void playerLevelUp()
     {
-        playerBody.SetActive(false);
+        playerBody.GetComponent<SpriteRenderer>().enabled = false;
         player.level++;
+        background.GetComponent<AudioSource>().PlayOneShot(lvlUpSFX);
 
         levelCard1 = setlevelCardAmounts();
         levelCard2 = setlevelCardAmounts();
@@ -505,10 +515,10 @@ public class alternativeGameManager : MonoBehaviour
     public List<int> setlevelCardAmounts()
     {
         List<int> aLevelCard = new List<int>() { 0, 0, 0 };
-        
+
         int statAmount = UnityEngine.Random.Range(3 * player.level, 6 * player.level);
-        
-        
+
+
         for (int i = 0; i < aLevelCard.Count; i++)
         {
 
@@ -534,7 +544,7 @@ public class alternativeGameManager : MonoBehaviour
         List<string> aLevelCard = new List<string>();
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
-        if(player.gaugeSize >= 5f && statList[statList.Count - 2] == "Gauge Size")
+        if (player.gaugeSize >= 5f && statList[statList.Count - 2] == "Gauge Size")
         {
             statList.RemoveAt(statList.Count - 2);
         }
@@ -543,13 +553,14 @@ public class alternativeGameManager : MonoBehaviour
 
     public void SelectStats(int cardNumber)
     {
+        ButtonSFX();
         cardSelected = cardNumber;
         switch (cardNumber)
         {
             case 0:
                 levelCard1Image.color = new Color32(160, 160, 160, 255);
-                levelCard2Image.color = new Color32(255,255,255, 255);
-                levelCard3Image.color = new Color32(255,255,255, 255);
+                levelCard2Image.color = new Color32(255, 255, 255, 255);
+                levelCard3Image.color = new Color32(255, 255, 255, 255);
                 break;
             case 1:
                 levelCard1Image.color = new Color32(255, 255, 255, 255);
@@ -566,6 +577,7 @@ public class alternativeGameManager : MonoBehaviour
 
     public void ConfirmChoice()
     {
+        ButtonSFX();
         switch (cardSelected)
         {
             case 0:
@@ -589,10 +601,15 @@ public class alternativeGameManager : MonoBehaviour
         player.updateStats();
         levelUpCanvas.SetActive(false);
         menuCanvas.SetActive(true);
-        playerBody.SetActive(true);
+        playerBody.GetComponent<SpriteRenderer>().enabled = true;
         inCombatButton.SetActive(true);
         inCombatObjects.SetActive(false);
         GenerateScrollButtons();
+    }
+
+    public void ButtonSFX()
+    {
+        buttonSFXPlayer.GetComponent<AudioSource>().PlayOneShot(buttonSFX);
     }
 
     //Skal måske ikke bruges
