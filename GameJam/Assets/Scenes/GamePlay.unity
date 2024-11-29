@@ -6252,7 +6252,6 @@ GameObject:
   - component: {fileID: 1494054000}
   - component: {fileID: 1494053999}
   - component: {fileID: 1494053998}
-  - component: {fileID: 1494054002}
   - component: {fileID: 1494054001}
   m_Layer: 0
   m_Name: Player
@@ -6281,10 +6280,10 @@ MonoBehaviour:
   gaugeSize: 1
   gauge: 0
   gaugeBarSize: 40
-  strength: 50
-  intelligence: 50
+  strength: 1
+  intelligence: 1
   luck: 0
-  exp: 9
+  exp: 0
   level: 1
 --- !u!212 &1494053999
 SpriteRenderer:
@@ -6449,19 +6448,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1494054002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494053997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df93de6fc3e54724aa035931808f2dc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SFXSource: {fileID: 0}
 --- !u!1 &1495849141
 GameObject:
   m_ObjectHideFlags: 0
