@@ -467,7 +467,7 @@ public class alternativeGameManager : MonoBehaviour
                     playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Embers":
-                    enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    enemy.getHit(attackDictionary[name].attackDamage1 * player.intelligence, attackDictionary[name].damageType1);
                     playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
                 case "Thunderstrike":
@@ -476,6 +476,10 @@ public class alternativeGameManager : MonoBehaviour
                     break;
                 case "Frost Armor":
                     player.boostStat(attackDictionary[name].magicalDefenceIecrease, "MagicalDefence", attackDictionary[name].duration);
+                    playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
+                    break;
+                case "Fireball":
+                    enemy.getHit(attackDictionary[name].attackDamage2 * player.intelligence, attackDictionary[name].damageType2);
                     playerBody.GetComponent<AudioSource>().PlayOneShot(attackDictionary[name].SFX);
                     break;
             }
