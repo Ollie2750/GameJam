@@ -19,10 +19,11 @@ public class attackClass
     public Sprite sprite;
     public Sprite buttonSprite;
     public string description;
+    public AudioClip SFX;
 
     public attackClass(string attackName, float unlockStatNumber1, float unlockStatNumber2, 
         float gaugeCost ,float attackDamage1, float attackDamage2, float healing, float physicalDefenceIncrease, 
-        float magicalDefenceIncrease, float duration, string damageType1, string damageType2, Sprite sprite, Sprite buttonSprite, string description)
+        float magicalDefenceIncrease, float duration, string damageType1, string damageType2, Sprite sprite, Sprite buttonSprite, string description, AudioClip SFX)
     {
         this.attackName = attackName;
         this.unlockStatNumber1 = unlockStatNumber1;
@@ -39,6 +40,7 @@ public class attackClass
         this.sprite = sprite;
         this.buttonSprite = buttonSprite;
         this.description = description;
+        this.SFX = SFX;
 
     }
 }

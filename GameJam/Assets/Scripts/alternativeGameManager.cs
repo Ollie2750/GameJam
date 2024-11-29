@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 
 public class alternativeGameManager : MonoBehaviour
 {
-    public Sprite noSprite;
 
     //GameOver screen objects
     public GameObject gameOverCanvas;
@@ -17,6 +16,7 @@ public class alternativeGameManager : MonoBehaviour
     //Level up screen Objects
     public GameObject levelUpCanvas;
 
+    [Header("Cards")]
     //Card1
     public Image card1Image1;
     public Image card1Image2;
@@ -39,6 +39,7 @@ public class alternativeGameManager : MonoBehaviour
     public TMP_Text card3Stat3;
 
     //Menu UI GameObjects
+    [Header("Menu UI GameObjects")]
     public GameObject menuCanvas;
 
     public GameObject inCombatButton;
@@ -59,24 +60,25 @@ public class alternativeGameManager : MonoBehaviour
     public int amountOfGaugeBars = 5;
 
     private List<GameObject> attackAndAbilitieButtens = new List<GameObject>();
-    
+
+    [Header("Player")]
     //player
     public TMP_Text playerHealthText;
     public playerClass player;
     public GameObject playerBody;
     public GameObject playerHealthBar;
+    public List<attackClass> playerAttacks = new List<attackClass>();
 
 
+    [Header("Enemy")]
     //enemy
     private float enemyScaling = 1f;
-
     public TMP_Text enemyhealthText;
     public enemyClass enemy;
     public GameObject enemyPrefab;
     private GameObject currentEnemy;
     public GameObject enemyHealthBar;
 
-    public List<attackClass> playerAttacks = new List<attackClass>();
 
 
     public bool inCombat = false;
@@ -84,6 +86,8 @@ public class alternativeGameManager : MonoBehaviour
     private Dictionary<string, attackClass> attackDictionary;
     private List<string> enemyNameList = new List<string>();
 
+
+    [Header("Stat cards")]
     //Stat cards
     private List<string> statList = new List<string>() {"Max Health","Strength","Intelligence","Physical Defence","Magical Defence", "Gauge Speed", "Gauge Size", "Luck" };
     private List<int> levelCard1 = new List<int>();
@@ -94,6 +98,10 @@ public class alternativeGameManager : MonoBehaviour
     private List<string> levelCard2StatType = new List<string>();
     private List<string> levelCard3StatType = new List<string>();
 
+
+    [Header("Sprites")]
+    //Placeholder sprite
+    public Sprite noSprite;
 
     //Attack sprites
     public Sprite punchSprite;
@@ -106,6 +114,16 @@ public class alternativeGameManager : MonoBehaviour
     public Sprite slimeSprite;
     public Sprite goblinSprite;
 
+    [Header("-----SFX-----")]
+    public AudioClip punchSFX;
+    public AudioClip uppercutSFX;
+    public AudioClip risingSpiritSFX;
+    public AudioClip bodyBreakerSFX;
+    public AudioClip runicImpactSFX;
+    public AudioClip embersSFX;
+    public AudioClip thunderstrikeSFX;
+    public AudioClip frostArmorSFX;
+
     void Start()
     {
         menuCanvas.SetActive(true);
@@ -113,14 +131,14 @@ public class alternativeGameManager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         attackDictionary = new Dictionary<string, attackClass>
         {
-            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, punchButtonSprite, "Lets intrduce them to our fist") },
-            {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, uppercutButtonSprite, "Duck and strike your opponent from underneath") },
-            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength") },
-            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Break your opponents body with a force so great that it damages your own.") },
-            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast") },
-            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards") },
-            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.") },
-            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.") },
+            {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical","", punchSprite, punchButtonSprite, "Lets intrduce them to our fist", punchSFX) },
+            {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, uppercutButtonSprite, "Duck and strike your opponent from underneath", uppercutSFX) },
+            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength", risingSpiritSFX) },
+            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Break your opponents body with a force so great that it damages your own.", bodyBreakerSFX) },
+            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast", runicImpactSFX) },
+            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
+            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
+            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
 
         };
 
@@ -323,31 +341,38 @@ public class alternativeGameManager : MonoBehaviour
                     {
                         enemy.getHit(player.intelligence, attackDictionary[name].damageType1);
                     }
-                    
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
 
                 case "Uppercut":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "Rising Spirit":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "BodyBreaker":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     player.getHit(player.health * .2f, attackDictionary[name].damageType1);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "Runic Impact":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
                     enemy.getHit(attackDictionary[name].attackDamage2 * player.intelligence, attackDictionary[name].damageType2);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "Embers":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "Thunderstrike":
                     enemy.getHit(attackDictionary[name].attackDamage1 * player.strength, attackDictionary[name].damageType1);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
                 case "Frost Armor":
                     player.boostStat(attackDictionary[name].magicalDefenceIecrease, "MagicalDefence", attackDictionary[name].duration);
+                    soundEffects.PlaySFX(attackDictionary[name].SFX);
                     break;
             }
         }
