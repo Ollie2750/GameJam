@@ -31,13 +31,13 @@ public class playerClass : MonoBehaviour
     {
         stats = new Dictionary<string, float>()
         {
-            {"Max Health", this.health},
+            {"MaxHealth", this.health},
             {"Strength", this.strength},
             {"Intelligence", this.intelligence },
-            {"Physical Defence", this.physicalDefence},
-            {"Magical Defence", this.magicalDefence},
-            {"Gauge Speed", this.gaugeSpeed},
-            {"Gauge Size", this.gaugeSize},
+            {"PhysicalDefence", this.physicalDefence},
+            {"MagicalDefence", this.magicalDefence},
+            {"GaugeSpeed", this.gaugeSpeed},
+            {"GaugeSize", this.gaugeSize},
             {"Luck", this.luck}
         };
     }
@@ -163,13 +163,13 @@ public class playerClass : MonoBehaviour
 
     public void updateStats()
     {
-        this.maxHealth = this.stats["Max Health"];
+        this.maxHealth = this.stats["MaxHealth"];
         this.strength = this.stats["Strength"];
         this.intelligence = this.stats["Intelligence"];
-        this.physicalDefence = this.stats["Physical Defence"];
-        this.magicalDefence = this.stats["Magical Defence"];
-        this.gaugeSpeed = this.stats["Gauge Speed"];
-        this.gaugeSize = this.stats["Gauge Size"];
+        this.physicalDefence = this.stats["PhysicalDefence"];
+        this.magicalDefence = this.stats["MagicalDefence"];
+        this.gaugeSpeed = this.stats["GaugeSpeed"];
+        this.gaugeSize = this.stats["GaugeSize"];
         this.luck = this.stats["Luck"];
     }
 }

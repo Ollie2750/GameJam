@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.79175174, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2429,7 +2429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4068,7 +4068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.79175174, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4143,7 +4143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6281,8 +6281,8 @@ MonoBehaviour:
   gaugeSize: 1
   gauge: 0
   gaugeBarSize: 40
-  strength: 1
-  intelligence: 1
+  strength: 50
+  intelligence: 50
   luck: 0
   exp: 9
   level: 1
@@ -6461,6 +6461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df93de6fc3e54724aa035931808f2dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFXSource: {fileID: 0}
 --- !u!1 &1495849141
 GameObject:
   m_ObjectHideFlags: 0
@@ -8795,6 +8796,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 506611796}
   levelUpCanvas: {fileID: 1203480622}
+  MaxHealthLeft: {fileID: -3214050496664526399, guid: b5fc9e811646b3e4c9d4afe6114f0f9a, type: 3}
+  MaxHealthRight: {fileID: 2685469687946051566, guid: b5fc9e811646b3e4c9d4afe6114f0f9a, type: 3}
+  StrengthLeft: {fileID: 5234712735026732438, guid: 61673ff683776434c8ef92c811e2b9ee, type: 3}
+  StrengthRight: {fileID: 1625368234535030743, guid: 61673ff683776434c8ef92c811e2b9ee, type: 3}
+  IntelligenceLeft: {fileID: 6971374446655332213, guid: 94322c1d8aadf7246aa228cb004f0e6d, type: 3}
+  IntelligenceRight: {fileID: -3842916120499854747, guid: 94322c1d8aadf7246aa228cb004f0e6d, type: 3}
+  PhysicalDefenceLeft: {fileID: 3344626259166314911, guid: de259e769f565e6488928665280f5f6c, type: 3}
+  PhysicalDefenceRight: {fileID: -6486943473501167899, guid: de259e769f565e6488928665280f5f6c, type: 3}
+  MagicalDefenceLeft: {fileID: 5312464700168704324, guid: 424dce43b912e7e40876a762c02b12db, type: 3}
+  MagicalDefenceRight: {fileID: -2701209214435051421, guid: 424dce43b912e7e40876a762c02b12db, type: 3}
+  GaugeSizeLeft: {fileID: -350084855938877198, guid: 400fb5faffd0bad4e8ba2a23487d4ec0, type: 3}
+  GaugeSizeRight: {fileID: -1446927698050924493, guid: 400fb5faffd0bad4e8ba2a23487d4ec0, type: 3}
+  GaugeSpeedLeft: {fileID: 3591200825980795040, guid: 2d012c4b451b1c3478142e0ab49aa04a, type: 3}
+  GaugeSpeedRight: {fileID: 6228301184605497233, guid: 2d012c4b451b1c3478142e0ab49aa04a, type: 3}
+  LuckLeft: {fileID: -6372743506346927103, guid: fd2a0f14d46d15c4194a2ed143030029, type: 3}
+  LuckRight: {fileID: -8746518762993605559, guid: fd2a0f14d46d15c4194a2ed143030029, type: 3}
   card1Image1: {fileID: 2064548853}
   card1Image2: {fileID: 533488482}
   card1Stat1: {fileID: 731221360}
@@ -8850,8 +8867,24 @@ MonoBehaviour:
   punchButtonSprite: {fileID: -5574447121488655312, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
   uppercutSprite: {fileID: 21300000, guid: 88e7e3b5e3c4536468e7562a8ec9ffe2, type: 3}
   uppercutButtonSprite: {fileID: -8497964341708218842, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  RisingSpirit: {fileID: -4822169618088273846, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  RisingSpiritButton: {fileID: 5168164665692441912, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  BodyBreaker: {fileID: -6949148823029432827, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  BodyBreakerButton: {fileID: 4410932304387273852, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  RunicImpact: {fileID: -6949148823029432827, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  RunicImpactButtom: {fileID: 4410932304387273852, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  Embers: {fileID: 3088110575476038119, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  EmbersButton: {fileID: 4303052417628075471, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  ThunderStrike: {fileID: -7161612185612342897, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  ThunderStrikeButton: {fileID: 5887942552363240080, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  FrostArmour: {fileID: -7886978222184123928, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  FrostAmourButton: {fileID: -2349400037820066695, guid: 8af655e6a84823d44b5e82f60be938f0, type: 3}
+  Fireball: {fileID: 4122778733182878379, guid: 716bd46e3d457c24fb2119bbe64cc3be, type: 3}
+  FireballButton: {fileID: 2244704960539871254, guid: c8832ee06f22b414bbb5490bf5bdb7e9, type: 3}
   slimeSprite: {fileID: 8981847712189951137, guid: ebc50cd553ab416479b797fb964fc938, type: 3}
   goblinSprite: {fileID: 5085877477530133662, guid: 896badc527e5a844aa91806237ec8874, type: 3}
+  witchSprite: {fileID: -8916331063196052339, guid: 8cd62037900578445a958e1c050a248f, type: 3}
+  dragonSprite: {fileID: 8171874417113966113, guid: 777510daafe9bd941a12f83dd7905da3, type: 3}
   buttonSFXPlayer: {fileID: 1298419451}
   punchSFX: {fileID: 8300000, guid: 6879443279838a6478c571c4837bc8e6, type: 3}
   uppercutSFX: {fileID: 8300000, guid: 36c935d268fe37a4883976cfebde7b18, type: 3}
@@ -8864,6 +8897,8 @@ MonoBehaviour:
   buttonSFX: {fileID: 8300000, guid: ebeeaca3613e2d347846ad6b2cdb3735, type: 3}
   lvlUpSFX: {fileID: 8300000, guid: 8cd5a968f984e56449cf101218d1803e, type: 3}
   PlayerDeathSFX: {fileID: 8300000, guid: 1fc9364c2eeff704492d38993cd32b03, type: 3}
+  fireballDragonSFX: {fileID: 8300000, guid: 126b75a672947624a8017373b384ec69, type: 3}
+  emberWitchSFX: {fileID: 8300000, guid: 052a77e0360198a4eac01e45871e6b1d, type: 3}
 --- !u!114 &1990460860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8876,8 +8911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8b87d64ac07134e86a525ea8e3abb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonSFXPlayer: {fileID: 1298419451}
-  buttonSFX: {fileID: 8300000, guid: ebeeaca3613e2d347846ad6b2cdb3735, type: 3}
 --- !u!1 &1994601811
 GameObject:
   m_ObjectHideFlags: 0
@@ -9196,7 +9229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.79175174, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

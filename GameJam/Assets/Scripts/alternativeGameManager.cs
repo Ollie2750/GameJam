@@ -17,6 +17,26 @@ public class alternativeGameManager : MonoBehaviour
     public GameObject levelUpCanvas;
     private int cardSelected = 0;
 
+    //StatImages
+    public Sprite MaxHealthLeft;
+    public Sprite MaxHealthRight;
+    public Sprite StrengthLeft;
+    public Sprite StrengthRight;
+    public Sprite IntelligenceLeft;
+    public Sprite IntelligenceRight;
+    public Sprite PhysicalDefenceLeft;
+    public Sprite PhysicalDefenceRight;
+    public Sprite MagicalDefenceLeft;
+    public Sprite MagicalDefenceRight;
+    public Sprite GaugeSizeLeft;
+    public Sprite GaugeSizeRight;
+    public Sprite GaugeSpeedLeft;
+    public Sprite GaugeSpeedRight;
+    public Sprite LuckLeft;
+    public Sprite LuckRight;
+
+    private Dictionary<string, Sprite> statImageSprites = new Dictionary<string, Sprite>();
+
     [Header("Cards")]
     //Card1
     public Image card1Image1;
@@ -100,7 +120,7 @@ public class alternativeGameManager : MonoBehaviour
 
     [Header("Stat cards")]
     //Stat cards
-    private List<string> statList = new List<string>() { "Max Health", "Strength", "Intelligence", "Physical Defence", "Magical Defence", "Gauge Speed", "Gauge Size", "Luck" };
+    private List<string> statList = new List<string>() { "MaxHealth", "Strength", "Intelligence", "PhysicalDefence", "MagicalDefence", "GaugeSpeed", "GaugeSize", "Luck" };
     private List<int> levelCard1 = new List<int>();
     private List<int> levelCard2 = new List<int>();
     private List<int> levelCard3 = new List<int>();
@@ -123,11 +143,28 @@ public class alternativeGameManager : MonoBehaviour
     public Sprite punchButtonSprite;
     public Sprite uppercutSprite;
     public Sprite uppercutButtonSprite;
+    public Sprite RisingSpirit;
+    public Sprite RisingSpiritButton;
+    public Sprite BodyBreaker;
+    public Sprite BodyBreakerButton;
+    public Sprite RunicImpact;
+    public Sprite RunicImpactButtom;
+    public Sprite Embers;
+    public Sprite EmbersButton;
+    public Sprite ThunderStrike;
+    public Sprite ThunderStrikeButton;
+    public Sprite FrostArmour;
+    public Sprite FrostAmourButton;
+    public Sprite Fireball;
+    public Sprite FireballButton;
+
 
 
     //Enemy sprite
     public Sprite slimeSprite;
     public Sprite goblinSprite;
+    public Sprite witchSprite;
+    public Sprite dragonSprite;
 
     [Header("-----SFX-----")]
     public GameObject buttonSFXPlayer;
@@ -142,6 +179,8 @@ public class alternativeGameManager : MonoBehaviour
     public AudioClip buttonSFX;
     public AudioClip lvlUpSFX;
     public AudioClip PlayerDeathSFX;
+    public AudioClip fireballDragonSFX;
+    public AudioClip emberWitchSFX;
 
     void Start()
     {
@@ -155,18 +194,39 @@ public class alternativeGameManager : MonoBehaviour
         {
             {"Punch", new attackClass("Punch", 0f, 0f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, "Physical", "", punchSprite, punchButtonSprite, "Lets intrduce them to our fist", punchSFX) },
             {"Uppercut", new attackClass("Uppercut", 2f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Physical", "", uppercutSprite, uppercutButtonSprite, "Duck and strike your opponent from underneath", uppercutSFX) },
-            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Bolster your booty and spirit to strike your opponent and raise your strength", risingSpiritSFX) },
-            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", noSprite, noSprite, "Break your opponents body with a force so great that it damages your own.", bodyBreakerSFX) },
-            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", noSprite, noSprite, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast", runicImpactSFX) },
-            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
-            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", noSprite, noSprite, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
-            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", noSprite, noSprite, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
+            {"Rising Spirit", new attackClass("Rising Spirit", 30f, 0f, 2f, 1.3f, 0f, 0f, 0f, 0f, 0f, "Physical", "", RisingSpirit, RisingSpiritButton, "Bolster your booty and spirit to strike your opponent and raise your strength", risingSpiritSFX) },
+            {"BodyBreaker", new attackClass("BodyBreaker", 50f, 0f, 4f, 3f, 0f, 0, 0f, 0f, 0f, "Physical", "", BodyBreaker, BodyBreakerButton, "Break your opponents body with a force so great that it damages your own.", bodyBreakerSFX) },
+            {"Runic Impact", new attackClass("Runic Impact", 40f, 15f, 2f, 1.4f, 1.1f, 0f, 0f, 0f, 0f, "Physical", "Magical", RunicImpact, RunicImpactButtom, "Channel your inner magic into your fist, to stike your opponent with a devastating runic blast", runicImpactSFX) },
+            {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", Embers, EmbersButton, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
+            {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", ThunderStrike, ThunderStrikeButton, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
+            {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", FrostArmour, FrostAmourButton, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
+            {"Fireball", new attackClass("Fireball", 0f, 80f, 5f, 0f, 2f, 0f, 0f, 0f, 0f, "Magical", "", Fireball, FireballButton, "Buuuuuuuurn!!!!!!", fireballDragonSFX) }
+        };
 
+        statImageSprites = new Dictionary<string, Sprite>
+        {
+            {"MaxHealthLeft", MaxHealthLeft },
+            {"MaxHealthRight", MaxHealthRight },
+            {"StrengthLeft", StrengthLeft },
+            {"StrengthRight", StrengthRight },
+            {"IntelligenceLeft", IntelligenceLeft },
+            {"IntelligenceRight", IntelligenceRight },
+            {"PhysicalDefenceLeft", PhysicalDefenceLeft },
+            {"PhysicalDefenceRight", PhysicalDefenceRight },
+            {"MagicalDefenceLeft", MagicalDefenceLeft },
+            {"MagicalDefenceRight", MagicalDefenceRight },
+            {"GaugeSizeLeft", GaugeSizeLeft },
+            {"GaugeSizeRight", GaugeSizeRight },
+            {"GaugeSpeedLeft", GaugeSpeedLeft },
+            {"GaugeSpeedRight", GaugeSpeedRight },
+            {"LuckLeft", LuckLeft },
+            {"LuckRight", LuckRight}
         };
 
 
 
-        enemyNameList = new List<string>() { "Slime", "Goblin" };
+
+        enemyNameList = new List<string>() { "Slime", "Goblin", "Witch" };
 
         GenerateScrollButtons();
 
@@ -345,6 +405,16 @@ public class alternativeGameManager : MonoBehaviour
                 enemy.attackList.Clear();
                 enemy.attackList.Add(attackDictionary["Punch"]);
                 break;
+            case "Witch":
+                enemy = new enemyClass(witchSprite, 5f * enemyScaling, 5f * enemyScaling, 1f * enemyScaling, 5f * enemyScaling, .2f * enemyScaling, 5f * enemyScaling, 0f * enemyScaling, 1 * enemyScaling, 5f * enemyScaling, 4f * enemyScaling, new List<attackClass>());
+                enemy.attackList.Clear();
+                enemy.attackList.Add(attackDictionary["Embers"]);
+                break;
+            //case "Dragon":
+                //enemy = new enemyClass(dragonSprite, 15f * enemyScaling, 15f * enemyScaling, 5f * enemyScaling, 5f * enemyScaling, .1f * enemyScaling, 5f * enemyScaling, 0f * enemyScaling, 10f * enemyScaling, 10f * enemyScaling, 20f * enemyScaling, new List<attackClass>());
+                //enemy.attackList.Clear();
+                //enemy.attackList.Add(attackDictionary["Fireball"]);
+                //break;
         }
 
 
@@ -352,6 +422,7 @@ public class alternativeGameManager : MonoBehaviour
         currentEnemy = Instantiate(enemyPrefab);
         currentEnemy.transform.position = new Vector2(5, -.4f);
         currentEnemy.GetComponent<SpriteRenderer>().sprite = enemy.sprite;
+        currentEnemy.AddComponent<AudioSource>();
 
         enemyScaling += .1f;
     }
@@ -422,7 +493,15 @@ public class alternativeGameManager : MonoBehaviour
                 case "Punch":
                     //play animation
                     player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
-
+                    currentEnemy.GetComponent<AudioSource>().PlayOneShot(punchSFX);
+                    break;
+                case "Ember":
+                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    currentEnemy.GetComponent<AudioSource>().PlayOneShot(emberWitchSFX);
+                    break;
+                case "Fireball":
+                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    currentEnemy.GetComponent<AudioSource>().PlayOneShot(fireballDragonSFX);
                     break;
             }
         }
@@ -490,20 +569,20 @@ public class alternativeGameManager : MonoBehaviour
         levelCard3StatType = setlevelCardStatTypes();
 
         //Show on cards in game
-        card1Image1.sprite = noSprite;
-        card1Image2.sprite = noSprite;
+        card1Image1.sprite = statImageSprites[levelCard1StatType[0] + "Left"];
+        card1Image2.sprite = statImageSprites[levelCard1StatType[1] + "Right"];
         card1Stat1.text = (levelCard1StatType[0] + " : " + levelCard1[0]);
         card1Stat2.text = (levelCard1StatType[1] + " : " + levelCard1[1]);
         card1Stat3.text = ("Heal : " + levelCard1[2]);
 
-        card2Image1.sprite = noSprite;
-        card2Image2.sprite = noSprite;
+        card2Image1.sprite = statImageSprites[levelCard2StatType[0] + "Left"];
+        card2Image2.sprite = statImageSprites[levelCard2StatType[1] + "Right"];
         card2Stat1.text = (levelCard2StatType[0] + " : " + levelCard2[0]);
         card2Stat2.text = (levelCard2StatType[1] + " : " + levelCard2[1]);
         card2Stat3.text = ("Heal : " + levelCard2[2]);
 
-        card3Image1.sprite = noSprite;
-        card3Image2.sprite = noSprite;
+        card3Image1.sprite = statImageSprites[levelCard3StatType[0] + "Left"];
+        card3Image2.sprite = statImageSprites[levelCard3StatType[1] + "Right"];
         card3Stat1.text = (levelCard3StatType[0] + " : " + levelCard3[0]);
         card3Stat2.text = (levelCard3StatType[1] + " : " + levelCard3[1]);
         card3Stat3.text = ("Heal : " + levelCard3[2]);
@@ -516,7 +595,7 @@ public class alternativeGameManager : MonoBehaviour
     {
         List<int> aLevelCard = new List<int>() { 0, 0, 0 };
 
-        int statAmount = UnityEngine.Random.Range(3 * player.level, 6 * player.level);
+        int statAmount = UnityEngine.Random.Range(2 * player.level, (2 + (int)player.luck) * player.level);
 
 
         for (int i = 0; i < aLevelCard.Count; i++)
@@ -544,7 +623,7 @@ public class alternativeGameManager : MonoBehaviour
         List<string> aLevelCard = new List<string>();
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
         aLevelCard.Add(statList[UnityEngine.Random.Range(0, statList.Count)]);
-        if (player.gaugeSize >= 5f && statList[statList.Count - 2] == "Gauge Size")
+        if (player.gaugeSize >= 5f && statList[statList.Count - 2] == "GaugeSize")
         {
             statList.RemoveAt(statList.Count - 2);
         }
