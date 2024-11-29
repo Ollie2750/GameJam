@@ -200,7 +200,7 @@ public class alternativeGameManager : MonoBehaviour
             {"Embers", new attackClass("Embers", 10f, 0f, 1f, 1.2f, 0f, 0f, 0f, 0f, 0f, "Magical", "", Embers, EmbersButton, "Produce a small, yet deadly spark of embers from your fingers, and set it towards", embersSFX) },
             {"Thunderstrike", new attackClass("Thunderstrike", 20f, 0f, 1f, 1.4f, 0f, 0f, 0f, 0f, 0f, "Magical", "", ThunderStrike, ThunderStrikeButton, "Overpower your enemies with a chaotic force of thunder that strikes the opponent and his ally.", thunderstrikeSFX) },
             {"Frost Armor", new attackClass("Frost Armor", 35f, 0f, 1f, 0f, 0f, 0f, 0f, 1.4f, 15f, "", "", FrostArmour, FrostAmourButton, "Reinforce your body with magical ice to absorb incoming magical damage.",frostArmorSFX) },
-            {"Fireball", new attackClass("Fireball", 0f, 80f, 5f, 0f, 2f, 0f, 0f, 0f, 0f, "Magical", "", Fireball, FireballButton, "Buuuuuuuurn!!!!!!", fireballDragonSFX) }
+            {"Fireball", new attackClass("Fireball", 0f, 80f, 5f, 0f, 2f, 0f, 0f, 0f, 0f, "", "Magical", Fireball, FireballButton, "Buuuuuuuurn!!!!!!", fireballDragonSFX) }
         };
 
         statImageSprites = new Dictionary<string, Sprite>
@@ -226,7 +226,7 @@ public class alternativeGameManager : MonoBehaviour
 
 
 
-        enemyNameList = new List<string>() { "Slime", "Goblin", "Witch" };
+        enemyNameList = new List<string>() {"Dragon" };
 
         GenerateScrollButtons();
 
@@ -410,11 +410,11 @@ public class alternativeGameManager : MonoBehaviour
                 enemy.attackList.Clear();
                 enemy.attackList.Add(attackDictionary["Embers"]);
                 break;
-            //case "Dragon":
-                //enemy = new enemyClass(dragonSprite, 15f * enemyScaling, 15f * enemyScaling, 5f * enemyScaling, 5f * enemyScaling, .1f * enemyScaling, 5f * enemyScaling, 0f * enemyScaling, 10f * enemyScaling, 10f * enemyScaling, 20f * enemyScaling, new List<attackClass>());
-                //enemy.attackList.Clear();
-                //enemy.attackList.Add(attackDictionary["Fireball"]);
-                //break;
+            case "Dragon":
+                enemy = new enemyClass(dragonSprite, 15f * enemyScaling, 15f * enemyScaling, 5f * enemyScaling, 5f * enemyScaling, .3f * enemyScaling, 6f * enemyScaling, 0f * enemyScaling, 10f * enemyScaling, 10f * enemyScaling, 20f * enemyScaling, new List<attackClass>());
+                enemy.attackList.Clear();
+                enemy.attackList.Add(attackDictionary["Fireball"]);
+                break;
         }
 
 
@@ -492,16 +492,17 @@ public class alternativeGameManager : MonoBehaviour
             {
                 case "Punch":
                     //play animation
-                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    player.getHit(attackDictionary[name].attackDamage1 * enemy.strength, attackDictionary[name].damageType1);
                     currentEnemy.GetComponent<AudioSource>().PlayOneShot(punchSFX);
                     break;
                 case "Ember":
-                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    player.getHit(attackDictionary[name].attackDamage2 * enemy.intelligence, attackDictionary[name].damageType2);
                     currentEnemy.GetComponent<AudioSource>().PlayOneShot(emberWitchSFX);
                     break;
                 case "Fireball":
-                    player.getHit(attackDictionary[name].attackDamage1, attackDictionary[name].damageType1);
+                    player.getHit(attackDictionary[name].attackDamage2 * enemy.intelligence, attackDictionary[name].damageType2);
                     currentEnemy.GetComponent<AudioSource>().PlayOneShot(fireballDragonSFX);
+                    Debug.Log(attackDictionary[name].attackDamage2 + " : " + attackDictionary[name].damageType2);
                     break;
             }
         }
