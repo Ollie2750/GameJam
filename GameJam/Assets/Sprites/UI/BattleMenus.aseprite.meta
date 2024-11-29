@@ -202,6 +202,46 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
+  - name: BattleMenus_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 13
+      width: 46
+      height: 46
+    spriteID: b81f7eb017e2d224aac3da122f87c8a7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: BattleMenus_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 343
+      y: 20
+      width: 32
+      height: 32
+    spriteID: 18e9448b0cce0e141ab3855898e387e4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: -1609010680
@@ -216,7 +256,7 @@ ScriptedImporter:
       cellRect:
         x: 13
         y: 16
-        width: 213
+        width: 371
         height: 94
       spriteId: 756745485afb4604bb5231ad9a333256
     linkedCells: []
