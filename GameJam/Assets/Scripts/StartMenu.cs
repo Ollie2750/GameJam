@@ -14,7 +14,7 @@ public class StartMenu : MonoBehaviour
 
     public void ExitButton()
     {
-        EditorApplication.ExitPlaymode();
+        //EditorApplication.ExitPlaymode();
         Application.Quit();
     }
 
